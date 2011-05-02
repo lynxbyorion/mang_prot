@@ -7,6 +7,8 @@ TARGET =
 DEPENDPATH += .
 INCLUDEPATH += .
 
+CONFIG += qt debug warn_on
+
 # Input
 HEADERS += mainform.h
 SOURCES += main.cpp mianform.cpp

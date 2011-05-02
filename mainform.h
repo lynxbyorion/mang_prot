@@ -3,7 +3,11 @@
 
 #include <QWidget>
 
-class QString;
+class QLineEdit;
+class QLabel;
+class QComboBox;
+class QTextEdit;
+class QPushButton;
 
 class MainForm: public QWidget
 {
@@ -11,8 +15,19 @@ class MainForm: public QWidget
 public:
     explicit MainForm(QWidget *parent = 0);
 
+public slots:
+    void activeSearch();
+
 private:
-    QString str;
+    QComboBox *cbYear;
+    QLineEdit *leSurname;
+    QLineEdit *leName;
+    QLineEdit *lePatronymic;
+    QComboBox *cbDisability;
+    QComboBox *cbCotegory;
+    QTextEdit *teAddress;
+    QPushButton *pbSearch;
+
 };
 
 #endif //MAINFORM_H
