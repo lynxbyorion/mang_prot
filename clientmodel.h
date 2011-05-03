@@ -9,7 +9,9 @@
 #ifndef CLIENTMODEL_H
 #define CLIENTMODEL_H
 
-class string;
+#include <string>
+
+using namespace std;
 
 class Client
 {

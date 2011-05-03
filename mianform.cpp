@@ -82,6 +82,62 @@ MainForm::MainForm(QWidget *parent)
     setWindowTitle("Клиентская база");
 }
 
+// interface implementation
+
+QString MainForm::getName() const
+{
+    return leName->text();
+}
+
+QString MainForm::getSurname() const
+{
+    return leSurname->text();
+}
+
+QString MainForm::getPatronymic() const
+{
+    return lePatronymic->text();
+}
+
+Client::Disability MainForm::getDisability() const
+{
+    switch(cbDisability->currentIndex()) {
+        case 0:
+            return Client::War;
+        case 1:
+            return Client::Infancy;
+        case 2:
+            return Client::Work;
+        case 3:
+            return Client::General;
+        default:
+            qWarning() << "cbDisability is not identified";
+            return Client::General;
+    }
+}
+
+Client::Group MainForm::getGroup() const
+{
+    switch(cbCotegory->currentIndex()) {
+        case 0:
+            return Client::GroupIII;
+        case 1:
+            return Client::GroupII;
+        case 2:
+            return Client::GroupI;
+        default:
+            qWarning() << "cbCotegory is not identified";
+            return Client::GroupI;
+    }
+}
+
+QString MainForm::getAddress() const
+{
+    return QString("cap");
+}
+
+
+//! slots
 void MainForm::activeSearch()
 {
 }
