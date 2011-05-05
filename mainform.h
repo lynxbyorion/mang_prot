@@ -16,12 +16,16 @@ class MainForm: public QWidget, public IViewForm
 public:
     explicit MainForm(QWidget *parent = 0);
 
+    void setName(QString);
     QString getName() const;
     QString getSurname() const;
     QString getPatronymic() const;
     Client::Disability getDisability() const;
     Client::Group getGroup() const;
     QString getAddress() const;
+
+signals:
+    void actionFindClient();
 
 public slots:
     void activeSearch();

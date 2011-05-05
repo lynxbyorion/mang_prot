@@ -16,12 +16,16 @@
  */
 class IViewForm {
 public:
+    virtual void setName(QString) = 0;
     virtual QString getName() const = 0;
     virtual QString getSurname() const = 0;
     virtual QString getPatronymic() const =0;
     virtual Client::Disability getDisability() const = 0;
     virtual Client::Group getGroup() const = 0;
     virtual QString getAddress() const = 0;
+
+public: // signals
+    virtual void actionFindClient() = 0;
 };
 
 #endif //IVIEWFORM_H

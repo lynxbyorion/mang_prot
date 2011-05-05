@@ -33,6 +33,7 @@ MainForm::MainForm(QWidget *parent)
     teAddress = new QTextEdit;
 
     pbSearch = new QPushButton("Найти");
+    connect(pbSearch, SIGNAL(pressed()), this, SLOT(activeSearch()));
 
     // name label layout
     QHBoxLayout *lbLayout = new QHBoxLayout;
@@ -83,6 +84,11 @@ MainForm::MainForm(QWidget *parent)
 }
 
 // interface implementation
+
+void MainForm::setName(QString name)
+{
+    leName->setText(name);
+}
 
 QString MainForm::getName() const
 {
@@ -140,5 +146,7 @@ QString MainForm::getAddress() const
 //! slots
 void MainForm::activeSearch()
 {
+    qWarning() << "in slot activeSearch";
+    emit actionFindClient();
 }
 

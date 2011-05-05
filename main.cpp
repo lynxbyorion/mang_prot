@@ -1,6 +1,8 @@
 #include <QApplication>
 #include <QTextCodec>
+
 #include "mainform.h"
+#include "clientpresenter.h"
 
 void initCodec(const char *codecName)
 {
@@ -15,8 +17,10 @@ int main( int argc, char *argv[] )
     initCodec("UTF-8");
     QApplication app(argc, argv);
 
-    MainForm mw;
-    mw.show();
+    MainForm* mainWindow = new MainForm();
+    ClientPreseter* presenter = new ClientPreseter(mainWindow);
+
+    mainWindow->show();
 
     return app.exec();
 }
