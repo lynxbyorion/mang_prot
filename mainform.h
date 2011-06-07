@@ -18,7 +18,7 @@ public:
 
     void setName(QString);
     QString getName() const;
-    QString getSurname() const;
+    QString getLastName() const;
     QString getPatronymic() const;
     Client::Disability getDisability() const;
     Client::Group getGroup() const;
@@ -31,8 +31,8 @@ public slots:
     void activeSearch();
 
 private:
-    QComboBox *cbYear;
-    QLineEdit *leSurname;
+    QComboBox *cbYear;      // год рождения
+    QLineEdit *leLastName;   // 
     QLineEdit *leName;
     QLineEdit *lePatronymic;
     QComboBox *cbDisability;

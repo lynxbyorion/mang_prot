@@ -5,8 +5,8 @@
 MainForm::MainForm(QWidget *parent)
     : QWidget(parent)
 {
-    QLabel *lbSurname = new QLabel("Фамилия");
-    leSurname = new QLineEdit();
+    QLabel *lbLastName = new QLabel("Фамилия");
+    leLastName = new QLineEdit();
     QLabel *lbName = new QLabel("Имя");
     leName = new QLineEdit();
     QLabel *lbPatronymic = new QLabel("Отчество");
@@ -37,13 +37,13 @@ MainForm::MainForm(QWidget *parent)
 
     // name label layout
     QHBoxLayout *lbLayout = new QHBoxLayout;
-    lbLayout->addWidget(lbSurname);
+    lbLayout->addWidget(lbLastName);
     lbLayout->addWidget(lbName);
     lbLayout->addWidget(lbPatronymic);
 
     // name layout
     QHBoxLayout *leLayout = new QHBoxLayout;
-    leLayout->addWidget(leSurname);
+    leLayout->addWidget(leLastName);
     leLayout->addWidget(leName);
     leLayout->addWidget(lePatronymic);
 
@@ -70,14 +70,24 @@ MainForm::MainForm(QWidget *parent)
     pbLayout->addStretch();
     pbLayout->addWidget(pbSearch);
 
-    // main layout
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    mainLayout->addLayout(lbLayout);
-    mainLayout->addLayout(leLayout);
-    mainLayout->addLayout(yearLayout);
-    mainLayout->addLayout(disLayout);
-    mainLayout->addLayout(adrLayout);
-    mainLayout->addLayout(pbLayout);
+    // left layout
+    QVBoxLayout *leftLayout = new QVBoxLayout;
+    leftLayout->addLayout(lbLayout);
+    leftLayout->addLayout(leLayout);
+    leftLayout->addLayout(yearLayout);
+    leftLayout->addLayout(disLayout);
+    leftLayout->addLayout(adrLayout);
+    leftLayout->addLayout(pbLayout);
+
+    QListView *listClient = new QListView;
+
+    // right layout
+    QVBoxLayout *rightLayout = new QVBoxLayout;
+    rightLayout->addWidget(listClient);
+
+    QHBoxLayout *mainLayout = new QHBoxLayout;
+    mainLayout->addLayout(leftLayout);
+    mainLayout->addLayout(rightLayout);
 
     setLayout(mainLayout);
     setWindowTitle("Клиентская база");
@@ -95,9 +105,9 @@ QString MainForm::getName() const
     return leName->text();
 }
 
-QString MainForm::getSurname() const
+QString MainForm::getLastName() const
 {
-    return leSurname->text();
+    return leLastName->text();
 }
 
 QString MainForm::getPatronymic() const

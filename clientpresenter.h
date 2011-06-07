@@ -10,6 +10,9 @@
 
 #include <QObject>
 #include "clientmodel.h"
+#include "databasemanager.h"
+
+class QSqlDatabase;
 
 class IViewForm;
 
@@ -22,6 +25,7 @@ public:
 
 private:
     void refreshView();
+    bool createConnection();
 
 private slots:
     /*! This slot identified client (find or create)
@@ -34,6 +38,10 @@ private slots:
 private:
     Client *m_client;
     IViewForm *m_view;
+
+    DataBaseManager *dbManager;
+
+
 
 };
 
