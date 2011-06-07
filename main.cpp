@@ -19,10 +19,8 @@ int main( int argc, char *argv[] )
 
     MainForm* mainWindow = new MainForm();
     ClientPreseter* presenter = new ClientPreseter(mainWindow);
-
+    Q_UNUSED(presenter);
     mainWindow->show();
-
-    delete presenter;
 
     return app.exec();
 }

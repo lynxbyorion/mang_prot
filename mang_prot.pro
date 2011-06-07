@@ -7,6 +7,7 @@ TARGET =
 DEPENDPATH += .
 INCLUDEPATH += .
 
+CONFIG += qt debug warn_on
 OBJECTS_DIR = ./obj
 MOC_DIR = ./moc
 

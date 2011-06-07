@@ -12,6 +12,8 @@
 #include <QObject>
 #include <QSqlDatabase>
 
+class Client;
+
 class DataBaseManager: public QObject
 {
   public:
@@ -20,6 +22,9 @@ class DataBaseManager: public QObject
   public:
     bool dbOpen();
     //bool dbClose();
+
+    bool findClient( QString lastName, QString firstName,
+            QString middleName, QList<Client*> *clients);
 
   private:
     QSqlDatabase db;

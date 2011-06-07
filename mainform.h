@@ -2,6 +2,7 @@
 #define MAINFORM_H
 
 #include <QWidget>
+
 #include "iviewform.h"
 
 class QLineEdit;
@@ -9,6 +10,7 @@ class QLabel;
 class QComboBox;
 class QTextEdit;
 class QPushButton;
+class QListView;
 
 class MainForm: public QWidget, public IViewForm
 {
@@ -23,6 +25,7 @@ public:
     Client::Disability getDisability() const;
     Client::Group getGroup() const;
     QString getAddress() const;
+    void setList( QStringList );
 
 signals:
     void actionFindClient();
@@ -39,6 +42,7 @@ private:
     QComboBox *cbCotegory;
     QTextEdit *teAddress;
     QPushButton *pbSearch;
+    QListView *listClient;
 
 };
 

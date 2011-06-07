@@ -79,7 +79,10 @@ MainForm::MainForm(QWidget *parent)
     leftLayout->addLayout(adrLayout);
     leftLayout->addLayout(pbLayout);
 
-    QListView *listClient = new QListView;
+    listClient = new QListView;
+    QStringList list;
+    list << "asdfasd" << "asdfasdf" << "asdgqre23421";
+    listClient->setModel(new QStringListModel(list));
 
     // right layout
     QVBoxLayout *rightLayout = new QVBoxLayout;
@@ -150,6 +153,11 @@ Client::Group MainForm::getGroup() const
 QString MainForm::getAddress() const
 {
     return QString("cap");
+}
+
+void MainForm::setList( QStringList list )
+{
+    listClient->setModel( new QStringListModel(list) );
 }
 
 

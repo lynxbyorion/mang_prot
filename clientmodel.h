@@ -9,7 +9,7 @@
 #ifndef CLIENTMODEL_H
 #define CLIENTMODEL_H
 
-#include <string>
+#include <QString>
 
 using namespace std;
 
@@ -33,27 +33,30 @@ public:
 public:
     Client ();
 
-    void setName(string n) { name = n; }
-    string getName() { return name; }
-    void setSurname(string s) { surname = s; }
-    string getSurname() { return surname; }
-    void setPatronymic(string p) { patronymic = p; }
-    string getPatronymic() { return patronymic; }
+    void setID(int i) { id = i; }
+    int getID() { return id; }
+    void setName(QString n) { name = n; }
+    QString getName() { return name; }
+    void setSurname(QString s) { surname = s; }
+    QString getSurname() { return surname; }
+    void setPatronymic(QString p) { patronymic = p; }
+    QString getPatronymic() { return patronymic; }
     void setYear(int y) { yearOfBirth = y; }
     int getYear() { return yearOfBirth; }
-    void setAddr(string addr) { address = addr; }
-    string getAddr() { return address; }
+    void setAddr(QString addr) { address = addr; }
+    QString getAddr() { return address; }
     void setDisability(Disability d) { disability = d; }
     Disability getDisability() { return disability; }
     void setGroup(Group g) { group = g; }
     Group getGroup() { return group; }
 
 private:
-    string name;
-    string surname;
-    string patronymic;
+    int id;
+    QString name;
+    QString surname;
+    QString patronymic;
     int yearOfBirth;
-    string address;    //! Address of the client
+    QString address;    //! Address of the client
     Disability disability;
     Group group;
 

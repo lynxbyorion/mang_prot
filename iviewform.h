@@ -23,6 +23,7 @@ public:
     virtual Client::Disability getDisability() const = 0;
     virtual Client::Group getGroup() const = 0;
     virtual QString getAddress() const = 0;
+    virtual void setList( QStringList ) = 0;
 
 public: // signals
     virtual void actionFindClient() = 0;
