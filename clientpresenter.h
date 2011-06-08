@@ -20,21 +20,25 @@ class ClientPreseter: public QObject
 {
     Q_OBJECT
 
-public:
+  public:
     explicit ClientPreseter(IViewForm *view, QObject *perent = 0);
 
-private:
+  private:
     void refreshView();
 
-private slots:
+  private slots:
     /*! This slot identified client (find or create)
      *
      * TODO здесь мы должны будем обратиться к базе для поиска слиента
      *
      */
     void identificationClient();
+    /*
+     * refresh the list clients on form
+     */
+    void refreshListClients();
 
-private:
+  private:
     QList<Client*> clients;
     IViewForm *m_view;
 

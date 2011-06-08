@@ -18,6 +18,7 @@ class DataBaseManager: public QObject
 {
   public:
     DataBaseManager(QObject *prarent = 0);
+    ~DataBaseManager();
 
   public:
     bool dbOpen();
@@ -25,6 +26,7 @@ class DataBaseManager: public QObject
 
     bool findClient( QString lastName, QString firstName,
             QString middleName, QList<Client*> *clients);
+    void fullListClients(QList<Client*> &);
 
   private:
     QSqlDatabase db;

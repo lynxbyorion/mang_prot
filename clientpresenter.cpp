@@ -24,6 +24,7 @@ ClientPreseter::ClientPreseter(IViewForm *view, QObject *perent)
         exit(1);
 
     }
+    refreshListClients();
 }
 
 void ClientPreseter::refreshView()
@@ -33,12 +34,14 @@ void ClientPreseter::refreshView()
 //! slots
 void ClientPreseter::identificationClient()
 {
-    QString lastName;
-    QString firstName;
-    QString middleName;
+    QString lastName = m_view->getLastName();
+    qWarning() << lastName;
+    QString firstName = "Gena";// m_view->getName();
+    qWarning() << firstName;
+    QString middleName = m_view->getPatronymic();
 
     dbManager->findClient(lastName, firstName, middleName, &clients);
-    qWarning() << "in identific 1: " + (clients.at(0))->getSurname();
+    //qWarning() << "in identific 1: " + (clients.at(0))->getSurname();
     /*
      * TODO закончил здесь. дольше тест
      *
@@ -52,5 +55,19 @@ void ClientPreseter::identificationClient()
     m_view->setList(list);
 
     qWarning() << "in the slot identification";
+}
+
+void ClientPreseter::refreshListClients()
+{
+    qWarning() << "in refreshList: begin ";
+    dbManager->fullListClients(clients);
+    QStringList list;
+    for (int i = 0; i < clients.size(); i++) {
+        list << (clients.at(i))->getSurname() +  " "
+            + (clients.at(i))->getName() + " "
+            + (clients.at(i))->getPatronymic();
+    }
+
+    m_view->setList(list);
 }
 

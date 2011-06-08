@@ -26,6 +26,9 @@ public:
     virtual void setList( QStringList ) = 0;
 
 public: // signals
+    /**
+     * emit when click push button for find client.
+     */
     virtual void actionFindClient() = 0;
 };
 
