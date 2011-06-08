@@ -29,14 +29,10 @@ class ClientPreseter: public QObject
   private slots:
     /*! This slot identified client (find or create)
      *
-     * TODO здесь мы должны будем обратиться к базе для поиска слиента
+     * TODO здесь мы должны будем обратиться к базе для поиска слиентов
      *
      */
-    void identificationClient();
-    /*
-     * refresh the list clients on form
-     */
-    void refreshListClients();
+    void identificationClients();
 
   private:
     QList<Client*> clients;

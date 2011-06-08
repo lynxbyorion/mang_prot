@@ -10,7 +10,7 @@ ClientPreseter::ClientPreseter(IViewForm *view, QObject *perent)
 {
     QObject* view_obj = dynamic_cast<QObject*>(m_view);
     QObject::connect(view_obj, SIGNAL(actionFindClient()),
-            this, SLOT(identificationClient()));
+            this, SLOT(identificationClients()));
 
     dbManager = new DataBaseManager();
     if (!dbManager->dbOpen())
@@ -24,7 +24,9 @@ ClientPreseter::ClientPreseter(IViewForm *view, QObject *perent)
         exit(1);
 
     }
-    refreshListClients();
+
+    identificationClients();
+
 }
 
 void ClientPreseter::refreshView()
@@ -32,35 +34,16 @@ void ClientPreseter::refreshView()
 }
 
 //! slots
-void ClientPreseter::identificationClient()
+void ClientPreseter::identificationClients()
 {
     QString lastName = m_view->getLastName();
-    qWarning() << lastName;
-    QString firstName = "Gena";// m_view->getName();
-    qWarning() << firstName;
+    QString firstName = m_view->getName();
     QString middleName = m_view->getPatronymic();
 
-    dbManager->findClient(lastName, firstName, middleName, &clients);
-    //qWarning() << "in identific 1: " + (clients.at(0))->getSurname();
-    /*
-     * TODO закончил здесь. дольше тест
-     *
-     */
-    QStringList list;
-    for (int i = 0; i < clients.size(); i++) {
-        list << (clients.at(i))->getSurname();
-        qWarning() << "in identific 2: " + (clients.at(i))->getSurname();
-    }
+    clients.clear();
 
-    m_view->setList(list);
+    dbManager->findClients(lastName, firstName, middleName, clients);
 
-    qWarning() << "in the slot identification";
-}
-
-void ClientPreseter::refreshListClients()
-{
-    qWarning() << "in refreshList: begin ";
-    dbManager->fullListClients(clients);
     QStringList list;
     for (int i = 0; i < clients.size(); i++) {
         list << (clients.at(i))->getSurname() +  " "
@@ -68,6 +51,9 @@ void ClientPreseter::refreshListClients()
             + (clients.at(i))->getPatronymic();
     }
 
+    qDebug() << "identification client" << list;
+
     m_view->setList(list);
+
 }
 

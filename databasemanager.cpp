@@ -50,7 +50,7 @@ bool DataBaseManager::dbOpen()
         /*qDebug() << "Insert!";*/
 
     query.prepare("INSERT INTO client (id, lastname, firstname, middlename, "
-            "year, address, disability, groupdis) VALUES (1, 'Sazonov', "
+            "year, address, disability, groupdis) VALUES (1, 'Sazowov', "
             "'Gennady', 'Валерьевич', 1985, 'бла бла бла бла 12 бла 43 бла', "
             "2, 3)");
     if(!query.exec())
@@ -67,7 +67,7 @@ bool DataBaseManager::dbOpen()
     else
         qDebug() << "Insert!";
     query.prepare("INSERT INTO client (id, lastname, firstname, middlename, "
-            "year, address, disability, groupdis) VALUES (3, 'Иванов', "
+            "year, address, disability, groupdis) VALUES (3, 'Ивановw', "
             "'Иван', 'Иваныч', 1965, 'блаыфвпжфывпыпжыводл ывалп о бла 12 ', "
             "2, 3)");
     if(!query.exec())
@@ -75,47 +75,37 @@ bool DataBaseManager::dbOpen()
     else
         qDebug() << "Insert!";
 
-    query.exec("SELECT * FROM client");
-    qDebug() << query.size();
-    qDebug() << query.isSelect();
-    qDebug() << query.isValid();
-
-
-    return true;
-}
-
-bool DataBaseManager::findClient( QString lastName, QString firstName,
-        QString middleName, QList<Client*> *clients)
-{
-    QSqlQuery query;
-    query.prepare("SELECT * FROM client WHERE (lastname, firstname, middlename) "
-            "VALUES (?,?,?)");
-    query.bindValue(0, lastName);
-    query.bindValue(1, firstName);
-    query.bindValue(2, middleName);
-    query.exec();
-
-    Client *client = new Client;
-    if (query.next()) {
-        client->setID(query.value(0).toInt());
-        client->setSurname(query.value(1).toString());
-        client->setName(query.value(2).toString());
-        client->setPatronymic(query.value(3).toString());
-        client->setYear(query.value(4).toInt());
-        client->setAddr(query.value(5).toString());
-        clients->append(client);
+    query.prepare("SELECT * FROM client WHERE lastname LIKE ?");
+    query.bindValue(0, "%w%");
+    if(!query.exec())
+        qDebug() << query.lastError();
+    else
+    {
+        while (query.next())
+            qDebug() << query.value(1);
+        qDebug() << "end!";
     }
 
+
+
     return true;
 }
 
-void DataBaseManager::fullListClients(QList<Client*> &list)
+bool DataBaseManager::findClients( QString lastName, QString firstName,
+        QString middleName, QList<Client*> &clientsList)
 {
     QSqlQuery query;
-    query.exec("SELECT * FROM client");
-    qDebug() << query.size();
-    qDebug() << query.isSelect();
-    qDebug() << query.isValid();
+    query.prepare("SELECT * FROM client WHERE lastname LIKE ? "
+            "AND firstname LIKE ? AND middlename LIKE ?");
+    query.bindValue(0, "%" + lastName + "%");
+    query.bindValue(1, "%" + firstName + "%");
+    query.bindValue(2, "%" + middleName + "%");
+    if(!query.exec())
+        qDebug() << query.lastError();
+    else
+    {
+        qDebug() << "end!";
+    }
 
     while (query.next()) {
         qWarning() << "in cicle fullListClient";
@@ -126,7 +116,9 @@ void DataBaseManager::fullListClients(QList<Client*> &list)
         client->setPatronymic(query.value(3).toString());
         client->setYear(query.value(4).toInt());
         client->setAddr(query.value(5).toString());
-        list.append(client);
-
+        clientsList.append(client);
     }
+
+    return true;
 }
+

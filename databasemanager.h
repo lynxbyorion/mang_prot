@@ -24,9 +24,8 @@ class DataBaseManager: public QObject
     bool dbOpen();
     //bool dbClose();
 
-    bool findClient( QString lastName, QString firstName,
-            QString middleName, QList<Client*> *clients);
-    void fullListClients(QList<Client*> &);
+    bool findClients( QString lastName, QString firstName,
+            QString middleName, QList<Client*> &clients);
 
   private:
     QSqlDatabase db;
