@@ -12,6 +12,14 @@ MainForm::MainForm(QWidget *parent)
     QLabel *lbPatronymic = new QLabel("Отчество");
     lePatronymic = new QLineEdit();
 
+
+    connect(leLastName, SIGNAL(textChanged(const QString &)), this,
+            SLOT(activeSearch()));
+    connect(leName, SIGNAL(textChanged(const QString &)), this,
+            SLOT(activeSearch()));
+    connect(lePatronymic, SIGNAL(textChanged(const QString &)), this,
+            SLOT(activeSearch()));
+
     QLabel *lbYear = new QLabel("Год рождения:");
     cbYear = new QComboBox;
     for(int year = MIN_YEAR; year < MAX_YEAR; year++)
@@ -80,9 +88,6 @@ MainForm::MainForm(QWidget *parent)
     leftLayout->addLayout(pbLayout);
 
     listClient = new QListView;
-    QStringList list;
-    list << "asdfasd" << "asdfasdf" << "asdgqre23421";
-    listClient->setModel(new QStringListModel(list));
 
     // right layout
     QVBoxLayout *rightLayout = new QVBoxLayout;
