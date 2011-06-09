@@ -15,7 +15,7 @@ using namespace std;
 
 class Client
 {
-public:
+  public:
     //! enumeration type of disability
     enum Disability {
         War = 0,    //! disabled veteran
@@ -30,7 +30,7 @@ public:
         GroupI
     };
 
-public:
+  public:
     Client ();
 
     void setID(int i) { id = i; }
@@ -50,7 +50,7 @@ public:
     void setGroup(Group g) { group = g; }
     Group getGroup() { return group; }
 
-private:
+  private:
     int id;
     QString name;
     QString surname;

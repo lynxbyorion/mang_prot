@@ -15,7 +15,7 @@ class QListView;
 class MainForm: public QWidget, public IViewForm
 {
     Q_OBJECT
-public:
+  public:
     explicit MainForm(QWidget *parent = 0);
 
     void setName(QString);
@@ -27,15 +27,15 @@ public:
     QString getAddress() const;
     void setList( QStringList );
 
-signals:
+  signals:
     void actionFindClient();
     void actionAddClient();
 
-private slots:
+  private slots:
     void activeSearch();
     void activeAddition();
 
-private:
+  private:
     QComboBox *cbYear;      // год рождения
     QLineEdit *leLastName;   // 
     QLineEdit *leName;
