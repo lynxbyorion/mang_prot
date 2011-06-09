@@ -31,7 +31,7 @@ signals:
     void actionFindClient();
     void actionAddClient();
 
-public slots:
+private slots:
     void activeSearch();
     void activeAddition();
 
