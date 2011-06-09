@@ -31,9 +31,11 @@ MainForm::MainForm(QWidget *parent)
     QStringList listDisability(QStringList() << "войны"
             << "детства" << "труда" << "общего заболевания");
     cbDisability->addItems(listDisability);
+    cbDisability->setCurrentIndex(-1);
     cbCotegory = new QComboBox;
     QStringList listCotegory(QStringList() << "III" << "II" << "I");
     cbCotegory->addItems(listCotegory);
+    cbCotegory->setCurrentIndex(-1);
     cbCotegory->setFixedWidth(50);
     QLabel *lbGroup = new QLabel("группы");
 
@@ -179,7 +181,13 @@ void MainForm::activeSearch()
 
 void MainForm::activeAddition()
 {
-    if
+    if( leLastName->text() == 0 || leName->text() == 0
+            || lePatronymic->text() == 0)
+    {
+        QMessageBox::warning(this, tr("Ошибка"),
+                tr("Введите полностью Ф.И.О."), QMessageBox::Ok);
+        return;
+    }
     emit actionAddClient();
 }
 
