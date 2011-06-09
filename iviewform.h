@@ -27,9 +27,14 @@ public:
 
 public: // signals
     /**
-     * emit when click push button for find client.
+     * emit when changing text in line edit Name of.
      */
     virtual void actionFindClient() = 0;
+    /**
+     * emit when pressed button pbAdd for addition
+     * client in database.
+     */
+    virtual void actionAddClient() = 0;
 };
 
 #endif //IVIEWFORM_H

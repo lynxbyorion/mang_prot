@@ -10,7 +10,7 @@ ClientPreseter::ClientPreseter(IViewForm *view, QObject *perent)
 {
     QObject* view_obj = dynamic_cast<QObject*>(m_view);
     QObject::connect(view_obj, SIGNAL(actionFindClient()),
-            this, SLOT(identificationClients()));
+            this, SLOT(findClients()));
 
     dbManager = new DataBaseManager();
     if (!dbManager->dbOpen())
@@ -25,7 +25,7 @@ ClientPreseter::ClientPreseter(IViewForm *view, QObject *perent)
 
     }
 
-    identificationClients();
+    findClients();
 
 }
 
@@ -34,7 +34,7 @@ void ClientPreseter::refreshView()
 }
 
 //! slots
-void ClientPreseter::identificationClients()
+void ClientPreseter::findClients()
 {
     QString lastName = m_view->getLastName();
     QString firstName = m_view->getName();
@@ -42,7 +42,7 @@ void ClientPreseter::identificationClients()
 
     clients.clear();
 
-    dbManager->findClients(lastName, firstName, middleName, clients);
+    dbManager->getClients(lastName, firstName, middleName, clients);
 
     QStringList list;
     for (int i = 0; i < clients.size(); i++) {

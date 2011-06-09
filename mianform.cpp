@@ -40,8 +40,8 @@ MainForm::MainForm(QWidget *parent)
     QLabel *lbAddress = new QLabel("Адрес:");
     teAddress = new QTextEdit;
 
-    pbSearch = new QPushButton("Найти");
-    connect(pbSearch, SIGNAL(pressed()), this, SLOT(activeSearch()));
+    pbAdd = new QPushButton("Добавить");
+    connect(pbAdd, SIGNAL(pressed()), this, SLOT(activeAddition()));
 
     // name label layout
     QHBoxLayout *lbLayout = new QHBoxLayout;
@@ -76,7 +76,7 @@ MainForm::MainForm(QWidget *parent)
     // button layout
     QHBoxLayout *pbLayout = new QHBoxLayout;
     pbLayout->addStretch();
-    pbLayout->addWidget(pbSearch);
+    pbLayout->addWidget(pbAdd);
 
     // left layout
     QVBoxLayout *leftLayout = new QVBoxLayout;
@@ -169,7 +169,11 @@ void MainForm::setList( QStringList list )
 //! slots
 void MainForm::activeSearch()
 {
-    qWarning() << "in slot activeSearch";
     emit actionFindClient();
+}
+
+void MainForm::activeAddition()
+{
+    emit actionAddClient();
 }
 

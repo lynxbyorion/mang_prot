@@ -29,9 +29,11 @@ public:
 
 signals:
     void actionFindClient();
+    void actionAddClient();
 
 public slots:
     void activeSearch();
+    void activeAddition();
 
 private:
     QComboBox *cbYear;      // год рождения
@@ -41,7 +43,7 @@ private:
     QComboBox *cbDisability;
     QComboBox *cbCotegory;
     QTextEdit *teAddress;
-    QPushButton *pbSearch;
+    QPushButton *pbAdd;
     QListView *listClient;
 
 };

@@ -91,7 +91,7 @@ bool DataBaseManager::dbOpen()
     return true;
 }
 
-bool DataBaseManager::findClients( QString lastName, QString firstName,
+bool DataBaseManager::getClients( QString lastName, QString firstName,
         QString middleName, QList<Client*> &clientsList)
 {
     QSqlQuery query;
