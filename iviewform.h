@@ -20,9 +20,11 @@ public:
     virtual QString getName() const = 0;
     virtual QString getLastName() const = 0;
     virtual QString getPatronymic() const =0;
+    virtual int getYear() const = 0;
+    virtual QString getAddress() const = 0;
     virtual Client::Disability getDisability() const = 0;
     virtual Client::Group getGroup() const = 0;
-    virtual QString getAddress() const = 0;
+
     virtual void setList( QStringList ) = 0;
 
 public: // signals

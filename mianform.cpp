@@ -123,6 +123,11 @@ QString MainForm::getPatronymic() const
     return lePatronymic->text();
 }
 
+int MainForm::getYear() const
+{
+    return cbYear->currentText().toInt();
+}
+
 Client::Disability MainForm::getDisability() const
 {
     switch(cbDisability->currentIndex()) {
@@ -174,6 +179,7 @@ void MainForm::activeSearch()
 
 void MainForm::activeAddition()
 {
+    if
     emit actionAddClient();
 }
 

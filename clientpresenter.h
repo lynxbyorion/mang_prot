@@ -31,6 +31,10 @@ class ClientPreseter: public QObject
      * This slot search
      */
     void findClients();
+    /**
+     * create Client and add it to the database.
+     */
+    void addClient();
 
   private:
     QList<Client*> clients;

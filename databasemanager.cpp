@@ -32,7 +32,7 @@ bool DataBaseManager::dbOpen()
     }
 
     QSqlQuery query;
-    query.prepare("CREATE TABLE IF NOT EXISTS client "
+    query.prepare("CREATE TABLE IF NOT EXISTS clients "
             "(id INTEGER UNIQUE PRIMARY KEY, lastname VARCHAR(20), "
             "firstname VARCHAR(20), middlename VARCHAR(20), "
             "year INTEGER, address VARCHAR(150), disability INTEGER, "
@@ -42,14 +42,7 @@ bool DataBaseManager::dbOpen()
     else
         qDebug() << "table created!";
 
-    /*query.prepare("INSERT INTO client (id, lastname, firstname, middlename,"*/
-            /*"year) VALUES (1, 'Sazonov', 'Gennady', 'Валерьевич', 1985)");*/
-    /*if(!query.exec())*/
-        /*qDebug() << query.lastError();*/
-    /*else*/
-        /*qDebug() << "Insert!";*/
-
-    query.prepare("INSERT INTO client (id, lastname, firstname, middlename, "
+    query.prepare("INSERT INTO clients (id, lastname, firstname, middlename, "
             "year, address, disability, groupdis) VALUES (1, 'Sazowov', "
             "'Gennady', 'Валерьевич', 1985, 'бла бла бла бла 12 бла 43 бла', "
             "2, 3)");
@@ -58,7 +51,7 @@ bool DataBaseManager::dbOpen()
     else
         qDebug() << "Insert!";
 
-    query.prepare("INSERT INTO client (id, lastname, firstname, middlename, "
+    query.prepare("INSERT INTO clients (id, lastname, firstname, middlename, "
             "year, address, disability, groupdis) VALUES (2, 'Петров', "
             "'Петька', 'Петрович', 1985, 'бла бла2323452 бла 43 бла', "
             "2, 3)");
@@ -66,7 +59,7 @@ bool DataBaseManager::dbOpen()
         qDebug() << query.lastError();
     else
         qDebug() << "Insert!";
-    query.prepare("INSERT INTO client (id, lastname, firstname, middlename, "
+    query.prepare("INSERT INTO clients (id, lastname, firstname, middlename, "
             "year, address, disability, groupdis) VALUES (3, 'Ивановw', "
             "'Иван', 'Иваныч', 1965, 'блаыфвпжфывпыпжыводл ывалп о бла 12 ', "
             "2, 3)");
@@ -75,7 +68,7 @@ bool DataBaseManager::dbOpen()
     else
         qDebug() << "Insert!";
 
-    query.prepare("SELECT * FROM client WHERE lastname LIKE ?");
+    query.prepare("SELECT * FROM clients WHERE lastname LIKE ?");
     query.bindValue(0, "%w%");
     if(!query.exec())
         qDebug() << query.lastError();
@@ -87,15 +80,57 @@ bool DataBaseManager::dbOpen()
     }
 
 
-
     return true;
+}
+
+int DataBaseManager::getMaxID()
+{
+    QSqlQuery query;
+
+    query.prepare("SELECT MAX(id) FROM clients");
+    if(!query.exec()) {
+        qDebug() << query.lastError();
+        return -1;
+    } else
+        if (!query.next())
+            return -1;
+
+    int id = query.value(0).toInt();
+
+    return id;
+}
+
+bool DataBaseManager::insertClientInDB(Client client)
+{
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO clients (id, lastname, firstname, middlename, "
+            "year, address, disability, groupdis) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    query.bindValue(0, client.getID());
+    query.bindValue(1, client.getSurname());
+    query.bindValue(2, client.getName());
+    query.bindValue(3, client.getPatronymic());
+    query.bindValue(4, client.getYear());
+    query.bindValue(5, client.getAddr());
+    query.bindValue(6, client.getDisability());
+    query.bindValue(7, client.getGroup());
+    if(!query.exec())
+        qDebug() << query.lastError();
+    else
+    {
+        qDebug() << "Insert!";
+        return true;
+    }
+    return false;
+
 }
 
 bool DataBaseManager::getClients( QString lastName, QString firstName,
         QString middleName, QList<Client*> &clientsList)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM client WHERE lastname LIKE ? "
+    query.prepare("SELECT * FROM clients WHERE lastname LIKE ? "
             "AND firstname LIKE ? AND middlename LIKE ?");
     query.bindValue(0, "%" + lastName + "%");
     query.bindValue(1, "%" + firstName + "%");

@@ -22,9 +22,11 @@ class MainForm: public QWidget, public IViewForm
     QString getName() const;
     QString getLastName() const;
     QString getPatronymic() const;
+    int getYear() const;
+    QString getAddress() const;
     Client::Disability getDisability() const;
     Client::Group getGroup() const;
-    QString getAddress() const;
+
     void setList( QStringList );
 
   signals:

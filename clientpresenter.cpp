@@ -11,6 +11,8 @@ ClientPreseter::ClientPreseter(IViewForm *view, QObject *perent)
     QObject* view_obj = dynamic_cast<QObject*>(m_view);
     QObject::connect(view_obj, SIGNAL(actionFindClient()),
             this, SLOT(findClients()));
+    QObject::connect(view_obj, SIGNAL(actionAddClient()),
+            this, SLOT(addClient()));
 
     dbManager = new DataBaseManager();
     if (!dbManager->dbOpen())
@@ -51,9 +53,29 @@ void ClientPreseter::findClients()
             + (clients.at(i))->getPatronymic();
     }
 
-    qDebug() << "identification client" << list;
-
     m_view->setList(list);
 
+}
+
+void ClientPreseter::addClient()
+{
+    Client client;
+    client.setID(dbManager->getMaxID() + 1);
+    client.setSurname(m_view->getLastName());
+    client.setName(m_view->getName());
+    client.setPatronymic(m_view->getPatronymic());
+    client.setYear(m_view->getYear());
+    client.setAddr(m_view->getAddress());
+    client.setDisability(m_view->getDisability());
+    client.setGroup(m_view->getGroup());
+
+    if (!dbManager->insertClientInDB(client)) {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Ошибка!");
+        msgBox.setText("Не могу добавить в базу клиента.");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+    }
 }
 
