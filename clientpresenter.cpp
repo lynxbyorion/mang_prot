@@ -13,6 +13,8 @@ ClientPreseter::ClientPreseter(IViewForm *view, QObject *perent)
             this, SLOT(findClients()));
     QObject::connect(view_obj, SIGNAL(actionAddClient()),
             this, SLOT(addClient()));
+    QObject::connect(view_obj, SIGNAL(actionReturnIndex(const int)),
+            this, SLOT(createClientWindow(const int)));
 
     dbManager = new DataBaseManager();
     if (!dbManager->dbOpen())
@@ -79,3 +81,7 @@ void ClientPreseter::addClient()
     }
 }
 
+void ClientPreseter::createClientWindow(const int index)
+{
+    qDebug() << "Index = " << index;
+}

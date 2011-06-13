@@ -90,6 +90,8 @@ MainForm::MainForm(QWidget *parent)
     leftLayout->addLayout(pbLayout);
 
     listClient = new QListView;
+    connect(listClient, SIGNAL(doubleClicked(const QModelIndex &)),
+            this, SLOT(activeClickOnItemList(const QModelIndex &)));
 
     // right layout
     QVBoxLayout *rightLayout = new QVBoxLayout;
@@ -191,3 +193,7 @@ void MainForm::activeAddition()
     emit actionAddClient();
 }
 
+void MainForm::activeClickOnItemList(const QModelIndex &index)
+{
+    emit actionReturnIndex(index.row());
+}

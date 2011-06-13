@@ -37,6 +37,10 @@ public: // signals
      * client in database.
      */
     virtual void actionAddClient() = 0;
+    /**
+     * emit end return index item of list
+     */
+    virtual void actionReturnIndex(const int) = 0;
 };
 
 #endif //IVIEWFORM_H

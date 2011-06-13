@@ -11,6 +11,7 @@ class QComboBox;
 class QTextEdit;
 class QPushButton;
 class QListView;
+class QModelIndex;
 
 class MainForm: public QWidget, public IViewForm
 {
@@ -32,10 +33,12 @@ class MainForm: public QWidget, public IViewForm
   signals:
     void actionFindClient();
     void actionAddClient();
+    void actionReturnIndex(const int index);
 
   private slots:
     void activeSearch();
     void activeAddition();
+    void activeClickOnItemList(const QModelIndex &);
 
   private:
     QComboBox *cbYear;      // год рождения

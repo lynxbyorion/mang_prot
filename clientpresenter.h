@@ -35,14 +35,16 @@ class ClientPreseter: public QObject
      * create Client and add it to the database.
      */
     void addClient();
+    /**
+     * create client window
+     */
+    void createClientWindow(const int);
 
   private:
     QList<Client*> clients;
     IViewForm *m_view;
 
     DataBaseManager *dbManager;
-
-
 
 };
 
