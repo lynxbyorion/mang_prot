@@ -15,6 +15,7 @@
 #include "databasemanager.h"
 
 class IViewForm;
+class ClientWindow;
 
 class ClientPreseter: public QObject
 {
@@ -43,6 +44,7 @@ class ClientPreseter: public QObject
   private:
     QList<Client*> clients;
     IViewForm *m_view;
+    ClientWindow *clientWindow;
 
     DataBaseManager *dbManager;
 

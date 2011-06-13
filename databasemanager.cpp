@@ -157,3 +157,25 @@ bool DataBaseManager::getClients( QString lastName, QString firstName,
     return true;
 }
 
+bool DataBaseManager::getClient(int id, Client *client)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM clients WHERE id = ?");
+    query.bindValue(0, id);
+    if(!query.exec())
+        qDebug() << query.lastError();
+    else
+    {
+        qDebug() << "getClient access!";
+    }
+
+    while (query.next()) {
+        client->setID(query.value(0).toInt());
+        client->setSurname(query.value(1).toString());
+        client->setName(query.value(2).toString());
+        client->setPatronymic(query.value(3).toString());
+        client->setYear(query.value(4).toInt());
+        client->setAddr(query.value(5).toString());
+    }
+}
+

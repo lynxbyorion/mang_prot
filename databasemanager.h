@@ -28,6 +28,7 @@ class DataBaseManager: public QObject
 
     bool getClients( QString lastName, QString firstName,
             QString middleName, QList<Client*> &clients);
+    bool getClient( int, Client *);
 
   private:
     QSqlDatabase db;

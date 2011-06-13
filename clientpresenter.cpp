@@ -2,6 +2,7 @@
 
 #include "clientpresenter.h"
 #include "iviewform.h"
+#include "clientwindow.h"
 
 #include <QDebug>
 
@@ -83,5 +84,7 @@ void ClientPreseter::addClient()
 
 void ClientPreseter::createClientWindow(const int index)
 {
-    qDebug() << "Index = " << index;
+    const int id = (clients.at(index))->getID();
+    clientWindow = new ClientWindow(id, dbManager);
+    clientWindow->exec();
 }

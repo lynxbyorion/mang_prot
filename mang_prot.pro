@@ -19,9 +19,12 @@ HEADERS += clientmodel.h \
            databasemanager.h \
            defandpar.h \
            iviewform.h \
-           mainform.h
+           mainform.h \
+           clientwindow.h
+
 SOURCES += clientmodel.cpp \
            clientpresenter.cpp \
            databasemanager.cpp \
            main.cpp \
-           mianform.cpp
+           mianform.cpp \
+           clientwindow.cpp
