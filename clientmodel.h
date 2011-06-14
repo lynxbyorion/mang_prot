@@ -50,6 +50,9 @@ class Client
     void setGroup(Group g) { group = g; }
     Group getGroup() { return group; }
 
+    QString getDisabilityToString();
+    QString getGroupToString();
+
   private:
     int id;
     QString name;
