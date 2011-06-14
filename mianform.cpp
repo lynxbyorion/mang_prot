@@ -92,6 +92,7 @@ MainForm::MainForm(QWidget *parent)
     listClient = new QListView;
     connect(listClient, SIGNAL(doubleClicked(const QModelIndex &)),
             this, SLOT(activeClickOnItemList(const QModelIndex &)));
+    listClient->setSelectionMode(QAbstractItemView::NoSelection);
 
     // right layout
     QVBoxLayout *rightLayout = new QVBoxLayout;
