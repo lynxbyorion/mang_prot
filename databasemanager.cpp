@@ -163,8 +163,10 @@ bool DataBaseManager::getClient(int id, Client *client)
     query.prepare("SELECT * FROM clients WHERE id = ?");
     query.bindValue(0, id);
     if(!query.exec())
+    {
         qDebug() << query.lastError();
-    else
+        return false;
+    }
     {
         qDebug() << "getClient access!";
     }
@@ -177,5 +179,6 @@ bool DataBaseManager::getClient(int id, Client *client)
         client->setYear(query.value(4).toInt());
         client->setAddr(query.value(5).toString());
     }
+    return true;
 }
 
