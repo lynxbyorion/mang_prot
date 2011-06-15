@@ -20,11 +20,13 @@ HEADERS += clientmodel.h \
            defandpar.h \
            iviewform.h \
            mainform.h \
-           clientwindow.h
+           clientwindow.h \
+           clientorder.h
 
 SOURCES += clientmodel.cpp \
            clientpresenter.cpp \
            databasemanager.cpp \
            main.cpp \
            mianform.cpp \
-           clientwindow.cpp
+           clientwindow.cpp \
+           clientorder.cpp
