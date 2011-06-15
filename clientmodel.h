@@ -11,8 +11,6 @@
 
 #include <QString>
 
-using namespace std;
-
 class Client
 {
   public:
