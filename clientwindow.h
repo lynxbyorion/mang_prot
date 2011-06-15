@@ -5,7 +5,13 @@
 
 class Client;
 class DataBaseManager;
+
+class QLabel;
 class QListView;
+class QDateEdit;
+class QComboBox;
+class QTextEdit;
+
 
 class ClientWindow: public QDialog
 {
@@ -17,6 +23,13 @@ class ClientWindow: public QDialog
   private:
     QPushButton *pbClose;
     QListView *listOrders;
+
+    QLabel *lbNumberOrder;
+    QDateEdit *deReceptionDate;
+    QComboBox *cbPayment;
+    QDateEdit *deDeliveryDate;
+    QComboBox *cbArticle;
+    QTextEdit *teDiagnosis;
 
     Client *client;
     DataBaseManager* dbmanager;
