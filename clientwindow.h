@@ -5,6 +5,7 @@
 
 class Client;
 class DataBaseManager;
+class QListView;
 
 class ClientWindow: public QDialog
 {
@@ -15,6 +16,7 @@ class ClientWindow: public QDialog
 
   private:
     QPushButton *pbClose;
+    QListView *listOrders;
 
     Client *client;
     DataBaseManager* dbmanager;
