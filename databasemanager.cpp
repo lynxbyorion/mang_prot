@@ -78,6 +78,23 @@ bool DataBaseManager::dbOpen()
             qDebug() << query.value(1);
         qDebug() << "end!";
     }
+    query.prepare("CREATE TABLE IF NOT EXISTS clientorder "
+            " (idorder INTEGER UNIQUE PRIMARY KEY, idclient INTEGER, "
+            " receptiondate DATE, deliverydate DATE, diagnosis TEXT, "
+            " article NUM)" );
+    if(!query.exec())
+        qDebug() << query.lastError();
+    else
+        qDebug() << "table order created!";
+
+    query.prepare("INSERT INTO clientorder (idorder, idclient, receptiondate, "
+            " deliverydate, diagnosis, article) "
+            " VALUES (30, 1, '1970-12-12', '1971-11-11', "
+            " 'Диагноз у меня нипойми какой', 3)" );
+    if(!query.exec())
+        qDebug() << query.lastError();
+    else
+        qDebug() << "Insert in order!";
 
 
     return true;
