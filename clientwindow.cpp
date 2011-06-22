@@ -102,3 +102,4 @@ ClientWindow::ClientWindow(const int clientID, DataBaseManager *db, QWidget *par
     //setFixedSize(600, 300);
     setWindowTitle(tr("Окно клиента"));
 }
+

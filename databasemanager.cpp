@@ -7,6 +7,7 @@
 
 #include "databasemanager.h"
 #include "clientmodel.h"
+#include "clientorder.h"
 
 DataBaseManager::DataBaseManager(QObject *parent)
     :QObject(parent)
@@ -71,34 +72,34 @@ bool DataBaseManager::dbOpen()
 
     query.prepare("CREATE TABLE IF NOT EXISTS clientorder "
             " (idorder INTEGER UNIQUE PRIMARY KEY, idclient INTEGER, "
-            " receptiondate DATE, deliverydate DATE, diagnosis TEXT, "
+            " payment NUM, receptiondate DATE, deliverydate DATE, diagnosis TEXT, "
             " article NUM)" );
     if(!query.exec())
         qDebug() << query.lastError();
     else
         qDebug() << "table order created!";
 
-    query.prepare("INSERT INTO clientorder (idorder, idclient, receptiondate, "
+    query.prepare("INSERT INTO clientorder (idorder, idclient, payment, receptiondate, "
             " deliverydate, diagnosis, article) "
-            " VALUES (30, 1, '1970-12-12', '1971-11-11', "
+            " VALUES (30, 1, 0, '1970-12-12', '1971-11-11', "
             " 'Диагноз у меня нипойми какой', 3)" );
     if(!query.exec())
         qDebug() << query.lastError();
     else
         qDebug() << "Insert!";
 
-    query.prepare("INSERT INTO clientorder (idorder, idclient, receptiondate, "
+    query.prepare("INSERT INTO clientorder (idorder, idclient, payment, receptiondate, "
             " deliverydate, diagnosis, article) "
-            " VALUES (31, 1, '1999-11-11', '1999-11-12', "
+            " VALUES (31, 1, 1, '1999-11-11', '1999-11-12', "
             " 'И опять не знаю чё сказать', 5)" );
     if(!query.exec())
         qDebug() << query.lastError();
     else
         qDebug() << "Insert!";
 
-    query.prepare("INSERT INTO clientorder (idorder, idclient, receptiondate, "
+    query.prepare("INSERT INTO clientorder (idorder, idclient, payment, receptiondate, "
             " deliverydate, diagnosis, article) "
-            " VALUES (32, 2, '1980-10-1', '1971-11-11', "
+            " VALUES (32, 2, 2, '1980-10-1', '1971-11-11', "
             " 'Диагноз у меня нипойми какой', 3)" );
     if(!query.exec())
         qDebug() << query.lastError();
@@ -192,9 +193,6 @@ bool DataBaseManager::getClient(int id, Client *client)
         qDebug() << query.lastError();
         return false;
     }
-    {
-        qDebug() << "getClient access!";
-    }
 
     while (query.next()) {
         client->setID(query.value(0).toInt());
@@ -203,6 +201,30 @@ bool DataBaseManager::getClient(int id, Client *client)
         client->setPatronymic(query.value(3).toString());
         client->setYear(query.value(4).toInt());
         client->setAddr(query.value(5).toString());
+    }
+    return true;
+}
+
+bool DataBaseManager::getClientOrders(int idClient, QList<Order*> &ordersList)
+{
+    QSqlQuery query;
+    query.prepare("SELECT * FROM clientorder WHERE idclient = ?");
+    query.bindValue(0, idClient);
+    if(!query.exec())
+    {
+        qDebug() << query.lastError();
+        return false;
+    }
+
+    while(query.next()) {
+        Order* order = new Order;
+        order->setID(query.value(0).toInt());
+        order->setPayment((Order::Payment)query.value(2).toInt());
+        order->setReceptionDate(query.value(3).toDate());
+        order->setDeliveryDate(query.value(4).toDate());
+        order->setDiagnosis(query.value(5).toString());
+        order->setArticle((Order::Article)query.value(6).toInt());
+        ordersList.append(order);
     }
     return true;
 }

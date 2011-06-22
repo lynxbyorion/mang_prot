@@ -13,6 +13,7 @@
 #include <QSqlDatabase>
 
 class Client;
+class Order;
 
 class DataBaseManager: public QObject
 {
@@ -29,6 +30,7 @@ class DataBaseManager: public QObject
     bool getClients( QString lastName, QString firstName,
             QString middleName, QList<Client*> &clients);
     bool getClient( int, Client *);
+    bool getClientOrders( int idClient, QList<Order*> &ordersList);
 
   private:
     QSqlDatabase db;
