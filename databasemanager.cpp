@@ -59,6 +59,7 @@ bool DataBaseManager::dbOpen()
         qDebug() << query.lastError();
     else
         qDebug() << "Insert!";
+
     query.prepare("INSERT INTO clients (id, lastname, firstname, middlename, "
             "year, address, disability, groupdis) VALUES (3, 'Ивановw', "
             "'Иван', 'Иваныч', 1965, 'блаыфвпжфывпыпжыводл ывалп о бла 12 ', "
@@ -68,16 +69,6 @@ bool DataBaseManager::dbOpen()
     else
         qDebug() << "Insert!";
 
-    query.prepare("SELECT * FROM clients WHERE lastname LIKE ?");
-    query.bindValue(0, "%w%");
-    if(!query.exec())
-        qDebug() << query.lastError();
-    else
-    {
-        while (query.next())
-            qDebug() << query.value(1);
-        qDebug() << "end!";
-    }
     query.prepare("CREATE TABLE IF NOT EXISTS clientorder "
             " (idorder INTEGER UNIQUE PRIMARY KEY, idclient INTEGER, "
             " receptiondate DATE, deliverydate DATE, diagnosis TEXT, "
@@ -94,8 +85,25 @@ bool DataBaseManager::dbOpen()
     if(!query.exec())
         qDebug() << query.lastError();
     else
-        qDebug() << "Insert in order!";
+        qDebug() << "Insert!";
 
+    query.prepare("INSERT INTO clientorder (idorder, idclient, receptiondate, "
+            " deliverydate, diagnosis, article) "
+            " VALUES (31, 1, '1999-11-11', '1999-11-12', "
+            " 'И опять не знаю чё сказать', 5)" );
+    if(!query.exec())
+        qDebug() << query.lastError();
+    else
+        qDebug() << "Insert!";
+
+    query.prepare("INSERT INTO clientorder (idorder, idclient, receptiondate, "
+            " deliverydate, diagnosis, article) "
+            " VALUES (32, 2, '1980-10-1', '1971-11-11', "
+            " 'Диагноз у меня нипойми какой', 3)" );
+    if(!query.exec())
+        qDebug() << query.lastError();
+    else
+        qDebug() << "Insert!";
 
     return true;
 }
