@@ -17,12 +17,12 @@
 class IViewForm;
 class ClientWindow;
 
-class ClientPreseter: public QObject
+class MainPresenter: public QObject
 {
     Q_OBJECT
 
   public:
-    explicit ClientPreseter(IViewForm *view, QObject *perent = 0);
+    explicit MainPresenter(IViewForm *view, QObject *perent = 0);
 
   private:
     void refreshView();

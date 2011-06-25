@@ -18,7 +18,7 @@ int main( int argc, char *argv[] )
     QApplication app(argc, argv);
 
     MainForm* mainWindow = new MainForm();
-    ClientPreseter* presenter = new ClientPreseter(mainWindow);
+    MainPresenter* presenter = new MainPresenter(mainWindow);
     Q_UNUSED(presenter);
     mainWindow->show();
 

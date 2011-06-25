@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+#include "iviewclientform.h"
+
 class Client;
 class DataBaseManager;
 
@@ -13,16 +15,24 @@ class QComboBox;
 class QTextEdit;
 
 
-class ClientWindow: public QDialog
+class ClientWindow: public QDialog, public IViewClientForm
 {
     Q_OBJECT
 
   public:
-    ClientWindow(const int, DataBaseManager *, QWidget *parent = 0);
+    explicit ClientWindow(QWidget *parent = 0);
+
+    void setFullName(QString);
+    void setDisability(QString);
+    void setAddress(QString);
 
   private:
     QPushButton *pbClose;
     QListView *listOrders;
+
+    QLabel *lbName;
+    QLabel *lbDis;
+    QLabel *lbAddress;
 
     QLabel *lbNumberOrder;
     QDateEdit *deReceptionDate;

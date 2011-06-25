@@ -18,10 +18,12 @@ HEADERS += clientmodel.h \
            mainpresenter.h \
            databasemanager.h \
            defandpar.h \
-           iviewform.h \
            mainform.h \
            clientwindow.h \
-           clientorder.h
+           clientorder.h \
+           clientpresenter.h \
+           iviewform.h \
+           iviewclientform.h
 
 SOURCES += clientmodel.cpp \
            mainpresenter.cpp \
@@ -29,4 +31,5 @@ SOURCES += clientmodel.cpp \
            main.cpp \
            mainform.cpp \
            clientwindow.cpp \
-           clientorder.cpp
+           clientorder.cpp \
+           clientpresenter.cpp

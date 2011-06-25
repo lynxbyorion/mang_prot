@@ -7,24 +7,16 @@
 #include "databasemanager.h"
 #include "clientmodel.h"
 
-ClientWindow::ClientWindow(const int clientID, DataBaseManager *db, QWidget *parent)
+ClientWindow::ClientWindow(QWidget *parent)
     :QDialog(parent)
 {
-    client = new Client();
-    db->getClient(clientID, client);
-
-    QString name =  client->getSurname() + " " + client->getName() +
-        " " + client->getPatronymic() + ", " + QString::number(client->getYear()) +
-        " года рождения.";
-    QLabel *lbName = new QLabel(name);
+    lbName = new QLabel();
     lbName->setWordWrap(true);
 
-    QString disabilyty = "Инвалид " + client->getDisabilityToString() + " " +
-        client->getGroupToString() + " группы.";
-    QLabel *lbDis = new QLabel(disabilyty);
+    lbDis = new QLabel();
 
     QLabel *lbAdr = new QLabel("Адрес:");
-    QLabel *lbAddress = new QLabel(client->getAddr());
+    lbAddress = new QLabel();
     lbAddress->setWordWrap(true);
 
     listOrders = new QListView;
@@ -89,7 +81,7 @@ ClientWindow::ClientWindow(const int clientID, DataBaseManager *db, QWidget *par
     orderLayout->addLayout(articleOrderLayout);
 
     QGroupBox *orderGroupBox = new QGroupBox(tr("Заказ"));
-    //orderGroupBox->setFlat(true);
+    orderGroupBox->setFlat(true);
     orderGroupBox->setLayout(orderLayout);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
@@ -103,3 +95,17 @@ ClientWindow::ClientWindow(const int clientID, DataBaseManager *db, QWidget *par
     setWindowTitle(tr("Окно клиента"));
 }
 
+void ClientWindow::setFullName(QString name)
+{
+    lbName->setText(name);
+}
+
+void ClientWindow::setDisability(QString disability)
+{
+    lbDis->setText(disability);
+}
+
+void ClientWindow::setAddress(QString address)
+{
+    lbAddress->setText(address);
+}

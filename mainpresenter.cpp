@@ -2,11 +2,12 @@
 
 #include "mainpresenter.h"
 #include "iviewform.h"
+#include "clientpresenter.h"
 #include "clientwindow.h"
 
 #include <QDebug>
 
-ClientPreseter::ClientPreseter(IViewForm *view, QObject *perent)
+MainPresenter::MainPresenter(IViewForm *view, QObject *perent)
     :QObject(perent), m_view(view)
 {
     QObject* view_obj = dynamic_cast<QObject*>(m_view);
@@ -34,12 +35,12 @@ ClientPreseter::ClientPreseter(IViewForm *view, QObject *perent)
 
 }
 
-void ClientPreseter::refreshView()
+void MainPresenter::refreshView()
 {
 }
 
 //! slots
-void ClientPreseter::findClients()
+void MainPresenter::findClients()
 {
     QString lastName = m_view->getLastName();
     QString firstName = m_view->getName();
@@ -60,7 +61,7 @@ void ClientPreseter::findClients()
 
 }
 
-void ClientPreseter::addClient()
+void MainPresenter::addClient()
 {
     Client client;
     client.setID(dbManager->getMaxID() + 1);
@@ -82,9 +83,13 @@ void ClientPreseter::addClient()
     }
 }
 
-void ClientPreseter::createClientWindow(const int index)
+void MainPresenter::createClientWindow(const int index)
 {
     const int id = (clients.at(index))->getID();
-    clientWindow = new ClientWindow(id, dbManager);
-    clientWindow->exec();
+
+    ClientWindow *window = new ClientWindow();
+    ClientPresenter *presenter = new ClientPresenter(dbManager, id, window, this);
+    Q_UNUSED(presenter);
+
+    window->exec();
 }
