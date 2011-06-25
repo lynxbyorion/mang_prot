@@ -1,12 +1,12 @@
 /**
- * \file clientpresenter.h
+ * \file mainpresenter.h
  * \brif In this file implements presenter of MVP
  * © Copyright 2011 Gennady Sazonov. All Rights Reserved.
  * 2011-05-05
  *
  */
-#ifndef CLIENTPRESENTER_H
-#define CLIENTPRESENTER_H
+#ifndef MAINPRESENTER_H
+#define MAINPRESENTER_H
 
 #include <QObject>
 #include <QList>
@@ -50,4 +50,4 @@ class ClientPreseter: public QObject
 
 };
 
-#endif //CLIENTPRESENTER_H
+#endif //MAINPRESENTER_H

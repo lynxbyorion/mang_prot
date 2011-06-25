@@ -2,7 +2,7 @@
 #include <QTextCodec>
 
 #include "mainform.h"
-#include "clientpresenter.h"
+#include "mainpresenter.h"
 
 void initCodec(const char *codecName)
 {

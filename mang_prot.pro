@@ -15,7 +15,7 @@ QT += sql
 
 # Input
 HEADERS += clientmodel.h \
-           clientpresenter.h \
+           mainpresenter.h \
            databasemanager.h \
            defandpar.h \
            iviewform.h \
@@ -24,9 +24,9 @@ HEADERS += clientmodel.h \
            clientorder.h
 
 SOURCES += clientmodel.cpp \
-           clientpresenter.cpp \
+           mainpresenter.cpp \
            databasemanager.cpp \
            main.cpp \
-           mianform.cpp \
+           mainform.cpp \
            clientwindow.cpp \
            clientorder.cpp

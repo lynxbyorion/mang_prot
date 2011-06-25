@@ -1,6 +1,6 @@
 #include <QMessageBox>
 
-#include "clientpresenter.h"
+#include "mainpresenter.h"
 #include "iviewform.h"
 #include "clientwindow.h"
 
