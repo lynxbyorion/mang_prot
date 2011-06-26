@@ -179,7 +179,7 @@ Client::Group MainForm::getGroup() const
 
 QString MainForm::getAddress() const
 {
-    return QString("cap");
+    return teAddress->toPlainText();
 }
 
 void MainForm::setList( QStringList list )
