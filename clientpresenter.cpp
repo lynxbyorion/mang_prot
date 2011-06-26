@@ -31,7 +31,9 @@ void ClientPresenter::initialize(int id)
 
     clientForm->setOrdersList(createOrdersStringList());
 
-    clientForm->setOrderData(orderToStringList(0));
+    if (clientOrders.size() != 0) {
+        clientForm->setOrderData(orderToStringList(0));
+    }
 }
 
 QString ClientPresenter::createFullNameString()
