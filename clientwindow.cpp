@@ -109,3 +109,8 @@ void ClientWindow::setAddress(QString address)
 {
     lbAddress->setText(address);
 }
+
+void ClientWindow::setOrdersList(QStringList list)
+{
+    listOrders->setModel( new QStringListModel(list));
+}

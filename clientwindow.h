@@ -5,9 +5,6 @@
 
 #include "iviewclientform.h"
 
-class Client;
-class DataBaseManager;
-
 class QLabel;
 class QListView;
 class QDateEdit;
@@ -25,6 +22,7 @@ class ClientWindow: public QDialog, public IViewClientForm
     void setFullName(QString);
     void setDisability(QString);
     void setAddress(QString);
+    void setOrdersList(QStringList);
 
   private:
     QPushButton *pbClose;
@@ -40,9 +38,6 @@ class ClientWindow: public QDialog, public IViewClientForm
     QDateEdit *deDeliveryDate;
     QComboBox *cbArticle;
     QTextEdit *teDiagnosis;
-
-    Client *client;
-    DataBaseManager* dbmanager;
 };
 
 #endif // CLIENTWINDOW_H

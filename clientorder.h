@@ -9,6 +9,8 @@
 #ifndef CLIENTORDER_H
 #define CLIENTORDER_H
 
+#include <string>
+
 #include <QDate>
 
 class Order {
@@ -51,6 +53,8 @@ class Order {
     QString getDiagnosis() { return diagnosis; }
     void setArticle(Article a) { article = a; }
     Article getArticle() { return article; }
+
+    QString getArticleToString();
 
   private:
     int id;
