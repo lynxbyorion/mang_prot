@@ -10,6 +10,7 @@ class QListView;
 class QDateEdit;
 class QComboBox;
 class QTextEdit;
+class QModelIndex;
 
 
 class ClientWindow: public QDialog, public IViewClientForm
@@ -24,6 +25,12 @@ class ClientWindow: public QDialog, public IViewClientForm
     void setAddress(QString);
     void setOrdersList(QStringList);
     void setOrderData(QStringList);
+
+  signals:
+    void viewCurrentOrder(const int);
+
+  private slots:
+    void activeCurrentOrder(const QModelIndex &);
 
   private:
     QPushButton *pbClose;

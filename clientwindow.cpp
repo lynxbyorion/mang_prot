@@ -20,7 +20,10 @@ ClientWindow::ClientWindow(QWidget *parent)
     lbAddress->setWordWrap(true);
 
     listOrders = new QListView;
-    listOrders->setFixedSize(200, 250);
+    connect(listOrders, SIGNAL(doubleClicked(const QModelIndex &)),
+            this, SLOT(activeCurrentOrder(const QModelIndex &)));
+    listOrders->setSelectionMode(QAbstractItemView::NoSelection);
+    listOrders->setFixedSize(230, 250);
 
     pbClose = new QPushButton(tr("Закрыть"));
     connect(pbClose, SIGNAL(clicked()), this, SLOT(close()));
@@ -150,4 +153,10 @@ void ClientWindow::setOrderData(QStringList list)
     deDeliveryDate->setDate(QDate::fromString(list.takeFirst()));
     teDiagnosis->setText(list.takeFirst());
     cbArticle->setCurrentIndex(list.takeFirst().toInt());
+}
+
+// slots
+void ClientWindow::activeCurrentOrder(const QModelIndex &index)
+{
+    emit viewCurrentOrder(index.row());
 }

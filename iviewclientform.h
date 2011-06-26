@@ -16,6 +16,10 @@ class IViewClientForm
     virtual void setAddress(QString) = 0;
     virtual void setOrdersList(QStringList) = 0;
     virtual void setOrderData(QStringList) = 0;
+
+  signals:
+    virtual void viewCurrentOrder(const int) = 0;
+
 };
 
 #endif // IVIEWCLIENTFORM_H

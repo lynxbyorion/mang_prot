@@ -13,8 +13,11 @@ ClientPresenter::ClientPresenter(DataBaseManager *db, int id,IViewClientForm *vi
     :QObject(parent), clientForm(view)
 {
     dbManager = db;
-    //QObject* view_obj = dynamic_cast<QObject*>(view);
-    //
+    QObject* view_obj = dynamic_cast<QObject*>(view);
+
+    QObject::connect(view_obj, SIGNAL(viewCurrentOrder(const int)),
+            this, SLOT(activeCurrentOrder(const int)));
+
     initialize(id);
 
 }
@@ -79,4 +82,10 @@ QStringList ClientPresenter::orderToStringList(int indexList)
      list << QString::number(clientOrders.at(indexList)->getArticle());
 
      return list;
+}
+
+// slots
+void ClientPresenter::activeCurrentOrder(const int index)
+{
+    clientForm->setOrderData(orderToStringList(index));
 }
