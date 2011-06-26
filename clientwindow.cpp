@@ -50,11 +50,29 @@ ClientWindow::ClientWindow(QWidget *parent)
 
     QLabel *lbPayment = new QLabel("Вид оплаты: ");
     cbPayment = new QComboBox;
+    QStringList listPayment(QStringList() << "фсс" << "наличный расчёт"
+            << "компенсация");
+    cbPayment->addItems(listPayment);
 
     QLabel *lbType = new QLabel("Вид изделия: ");
     cbArticle = new QComboBox;
+    QStringList listArticle(QStringList() << "Протез"
+            << "Корсет грудопоясничный"
+            << "Тутор"
+            << "Бандаж"
+            << "Наколенники"
+            << "Грыжевой бандаж (антральная грыжа)"
+            << "Грыжевой бандаж (паховая грыжа)"
+            << "Ортопедическая обувь"
+            << "Протез молочной железы"
+            << "Головодержатель");
+    cbArticle->addItems(listArticle);
+
     QLabel *lbDelivery = new QLabel("дата выдачи изделия ");
     deDeliveryDate = new QDateEdit;
+
+    QLabel *lbDiagnosis = new QLabel(tr("Диагноз"));
+    teDiagnosis = new QTextEdit;
 
     QHBoxLayout *bottomLayout = new QHBoxLayout;
     bottomLayout->addStretch();
@@ -72,13 +90,22 @@ ClientWindow::ClientWindow(QWidget *parent)
     QHBoxLayout *articleOrderLayout = new QHBoxLayout;
     articleOrderLayout->addWidget(lbType);
     articleOrderLayout->addWidget(cbArticle);
-    articleOrderLayout->addWidget(lbDelivery);
-    articleOrderLayout->addWidget(deDeliveryDate);
+
+    QHBoxLayout *deliveryLayout = new QHBoxLayout;
+    deliveryLayout->addWidget(lbDelivery);
+    deliveryLayout->addWidget(deDeliveryDate);
+
+    QHBoxLayout *diagnosisLayout = new QHBoxLayout;
+    diagnosisLayout->addWidget(lbDiagnosis);
+    diagnosisLayout->addWidget(teDiagnosis);
 
     QVBoxLayout *orderLayout = new  QVBoxLayout;
     orderLayout->addLayout(numOrderLayout);
     orderLayout->addLayout(payOrderLayout);
     orderLayout->addLayout(articleOrderLayout);
+    orderLayout->addLayout(deliveryLayout);
+    orderLayout->addLayout(diagnosisLayout);
+
 
     QGroupBox *orderGroupBox = new QGroupBox(tr("Заказ"));
     orderGroupBox->setFlat(true);
@@ -113,4 +140,14 @@ void ClientWindow::setAddress(QString address)
 void ClientWindow::setOrdersList(QStringList list)
 {
     listOrders->setModel( new QStringListModel(list));
+}
+
+void ClientWindow::setOrderData(QStringList list)
+{
+    lbNumberOrder->setText(list.takeFirst());
+    cbPayment->setCurrentIndex(list.takeFirst().toInt());
+    deReceptionDate->setDate(QDate::fromString(list.takeFirst()));
+    deDeliveryDate->setDate(QDate::fromString(list.takeFirst()));
+    teDiagnosis->setText(list.takeFirst());
+    cbArticle->setCurrentIndex(list.takeFirst().toInt());
 }

@@ -54,6 +54,7 @@ class Order {
     void setArticle(Article a) { article = a; }
     Article getArticle() { return article; }
 
+    QString getPaymentToString();
     QString getArticleToString();
 
   private:

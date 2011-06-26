@@ -23,6 +23,7 @@ class ClientWindow: public QDialog, public IViewClientForm
     void setDisability(QString);
     void setAddress(QString);
     void setOrdersList(QStringList);
+    void setOrderData(QStringList);
 
   private:
     QPushButton *pbClose;

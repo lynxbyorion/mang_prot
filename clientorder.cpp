@@ -6,6 +6,22 @@ Order::Order()
 {
 }
 
+QString Order::getPaymentToString()
+{
+    switch(payment)
+    {
+        case Fss:
+            return "ФСС";
+        case Cash:
+            return "Наличный расчёт";
+        case Compensation:
+            return "Компенсация";
+        default:
+            qDebug() << "Warning:  empty payment!";
+            return "";
+    }
+}
+
 QString Order::getArticleToString()
 {
     switch(article)
