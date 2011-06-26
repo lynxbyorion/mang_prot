@@ -108,6 +108,18 @@ MainForm::MainForm(QWidget *parent)
 
 // interface implementation
 
+void MainForm::refresh()
+{
+    leLastName->setText(tr(""));
+    leName->setText(tr(""));
+    lePatronymic->setText(tr(""));
+    cbYear->setCurrentIndex(-1);
+    cbDisability->setCurrentIndex(-1);
+    cbCotegory->setCurrentIndex(-1);
+    teAddress->setText(tr(""));
+
+}
+
 void MainForm::setName(QString name)
 {
     leName->setText(name);

@@ -37,6 +37,7 @@ MainPresenter::MainPresenter(IViewForm *view, QObject *perent)
 
 void MainPresenter::refreshView()
 {
+    m_view->refresh();
 }
 
 //! slots
@@ -81,6 +82,7 @@ void MainPresenter::addClient()
         msgBox.setIcon(QMessageBox::Critical);
         msgBox.exec();
     }
+    refreshView();
 }
 
 void MainPresenter::createClientWindow(const int index)

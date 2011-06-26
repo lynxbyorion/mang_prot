@@ -19,6 +19,8 @@ class MainForm: public QWidget, public IViewForm
   public:
     explicit MainForm(QWidget *parent = 0);
 
+    void refresh();
+
     void setName(QString);
     QString getName() const;
     QString getLastName() const;

@@ -16,6 +16,8 @@
  */
 class IViewForm {
 public:
+    virtual void refresh() = 0;
+
     virtual void setName(QString) = 0;
     virtual QString getName() const = 0;
     virtual QString getLastName() const = 0;
