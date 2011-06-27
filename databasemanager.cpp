@@ -126,6 +126,23 @@ int DataBaseManager::getMaxID()
     return id;
 }
 
+int DataBaseManager::getMaxOrderID()
+{
+    QSqlQuery query;
+
+    query.prepare("SELECT MAX(id) FROM clientorder");
+    if(!query.exec()) {
+        qDebug() << query.lastError();
+        return -1;
+    } else
+        if (!query.next())
+            return -1;
+
+    int id = query.value(0).toInt();
+
+    return id;
+}
+
 bool DataBaseManager::insertClientInDB(Client client)
 {
     QSqlQuery query;

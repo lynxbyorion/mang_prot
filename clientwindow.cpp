@@ -16,6 +16,7 @@ ClientWindow::ClientWindow(QWidget *parent)
     lbDis = new QLabel();
 
     QLabel *lbAdr = new QLabel("Адрес:");
+    lbAdr->setAlignment(Qt::AlignTop);
     lbAddress = new QLabel();
     lbAddress->setWordWrap(true);
 
@@ -47,7 +48,9 @@ ClientWindow::ClientWindow(QWidget *parent)
     infoLayout->addWidget(listOrders);
 
     // ordering information
+    QLabel *lbNumberText = new QLabel("№ ");
     lbNumberOrder = new QLabel("0");
+    //lbNumberOrder->setAlignment(Qt::AlignLeft);
     QLabel *lbReceptionDate = new QLabel("Дата обращения: ");
     deReceptionDate = new QDateEdit;
 
@@ -74,7 +77,8 @@ ClientWindow::ClientWindow(QWidget *parent)
     QLabel *lbDelivery = new QLabel("дата выдачи изделия ");
     deDeliveryDate = new QDateEdit;
 
-    QLabel *lbDiagnosis = new QLabel(tr("Диагноз"));
+    QLabel *lbDiagnosis = new QLabel(tr("Диагноз: "));
+    lbDiagnosis->setAlignment(Qt::AlignTop);
     teDiagnosis = new QTextEdit;
 
     QHBoxLayout *bottomLayout = new QHBoxLayout;
@@ -82,7 +86,9 @@ ClientWindow::ClientWindow(QWidget *parent)
     bottomLayout->addWidget(pbClose);
 
     QHBoxLayout *numOrderLayout = new QHBoxLayout;
+    numOrderLayout->addWidget(lbNumberText);
     numOrderLayout->addWidget(lbNumberOrder);
+    numOrderLayout->addStretch();
     numOrderLayout->addWidget(lbReceptionDate);
     numOrderLayout->addWidget(deReceptionDate);
 
