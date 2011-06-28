@@ -43,6 +43,8 @@ class Order {
 
     void setID(int i) { id = i; }
     int getID() { return id; }
+    void setIDClient(int i) { idClient = i; }
+    int getIDClient() { return idClient; }
     void setPayment(Payment p) { payment = p; }
     Payment getPayment() { return payment; }
     void setReceptionDate(QDate date) { receptionDate = date; }
@@ -59,6 +61,7 @@ class Order {
 
   private:
     int id;
+    int idClient;
     Payment payment;
     QDate   receptionDate;
     QDate   deliveryDate;

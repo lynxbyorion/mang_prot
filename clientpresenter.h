@@ -32,6 +32,7 @@ class ClientPresenter: public QObject
 
   private slots:
     void activeCurrentOrder(const int);
+    void addOrder(Order &);
 
   private:
     Client *client;

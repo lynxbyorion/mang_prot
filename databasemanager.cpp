@@ -130,7 +130,7 @@ int DataBaseManager::getMaxOrderID()
 {
     QSqlQuery query;
 
-    query.prepare("SELECT MAX(id) FROM clientorder");
+    query.prepare("SELECT MAX(idorder) FROM clientorder");
     if(!query.exec()) {
         qDebug() << query.lastError();
         return -1;
@@ -167,6 +167,33 @@ bool DataBaseManager::insertClientInDB(Client client)
     }
     return false;
 
+}
+
+bool DataBaseManager::insertOrderInDB(Order order)
+{
+    QSqlQuery query;
+
+    query.prepare("INSERT INTO clientorder (idorder, idclient, payment, receptiondate, "
+            " deliverydate, diagnosis, article) "
+            " VALUES(?, ?, ?, ?, ?, ?, ?)");
+    query.bindValue(0, getMaxOrderID() + 1);
+    qDebug() <<  "id order = " << getMaxOrderID() +1;
+    query.bindValue(1, order.getIDClient());
+    qDebug() <<  "id client = " << order.getIDClient();
+    query.bindValue(2, order.getPayment());
+    qDebug() <<  "payment = " << order.getPayment();
+    query.bindValue(3, order.getReceptionDate());
+    query.bindValue(4, order.getDeliveryDate());
+    query.bindValue(5, order.getDiagnosis());
+    query.bindValue(6, order.getArticle());
+    if (!query.exec())
+        qDebug() << "EE in insert order: " << query.lastError();
+    else
+    {
+        qDebug() << "Insert!";
+        return true;
+    }
+    return false;
 }
 
 bool DataBaseManager::getClients( QString lastName, QString firstName,
@@ -213,6 +240,7 @@ bool DataBaseManager::getClient(int id, Client *client)
 
     while (query.next()) {
         client->setID(query.value(0).toInt());
+        qDebug() << "id client in getClient: " << client->getID();
         client->setSurname(query.value(1).toString());
         client->setName(query.value(2).toString());
         client->setPatronymic(query.value(3).toString());

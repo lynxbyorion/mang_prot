@@ -11,6 +11,9 @@ class QDateEdit;
 class QComboBox;
 class QTextEdit;
 class QModelIndex;
+class QGroupBox;
+
+class Order;
 
 
 class ClientWindow: public QDialog, public IViewClientForm
@@ -28,13 +31,17 @@ class ClientWindow: public QDialog, public IViewClientForm
 
   signals:
     void viewCurrentOrder(const int);
+    void pushAddOrder(Order &);
 
   private slots:
     void activeCurrentOrder(const QModelIndex &);
+    void activePbAddOrder();
 
   private:
     QPushButton *pbClose;
+    QPushButton *pbAddOrder;
     QListView *listOrders;
+    QGroupBox *orderGroupBox;
 
     QLabel *lbName;
     QLabel *lbDis;

@@ -17,6 +17,8 @@ ClientPresenter::ClientPresenter(DataBaseManager *db, int id,IViewClientForm *vi
 
     QObject::connect(view_obj, SIGNAL(viewCurrentOrder(const int)),
             this, SLOT(activeCurrentOrder(const int)));
+    QObject::connect(view_obj, SIGNAL(pushAddOrder(Order &)),
+            this, SLOT(addOrder(Order &)));
 
     initialize(id);
 
@@ -88,4 +90,12 @@ QStringList ClientPresenter::orderToStringList(int indexList)
 void ClientPresenter::activeCurrentOrder(const int index)
 {
     clientForm->setOrderData(orderToStringList(index));
+}
+
+void ClientPresenter::addOrder(Order &order)
+{
+    order.setIDClient(client->getID());
+    qDebug() << "id client: " << client->getID();
+    qDebug() << "id order in addOrder: " << order.getIDClient();
+    dbManager->insertOrderInDB(order);
 }

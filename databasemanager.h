@@ -26,7 +26,8 @@ class DataBaseManager: public QObject
     //bool dbClose();
     int getMaxID();
     int getMaxOrderID();
-    bool insertClientInDB(Client client);
+    bool insertClientInDB(Client);
+    bool insertOrderInDB(Order);
 
     bool getClients( QString lastName, QString firstName,
             QString middleName, QList<Client*> &clients);

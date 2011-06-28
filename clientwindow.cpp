@@ -6,6 +6,7 @@
 
 #include "databasemanager.h"
 #include "clientmodel.h"
+#include "clientorder.h"
 
 ClientWindow::ClientWindow(QWidget *parent)
     :QDialog(parent)
@@ -21,10 +22,13 @@ ClientWindow::ClientWindow(QWidget *parent)
     lbAddress->setWordWrap(true);
 
     listOrders = new QListView;
-    connect(listOrders, SIGNAL(doubleClicked(const QModelIndex &)),
+    connect(listOrders, SIGNAL(clicked(const QModelIndex &)),
             this, SLOT(activeCurrentOrder(const QModelIndex &)));
     listOrders->setSelectionMode(QAbstractItemView::NoSelection);
     listOrders->setFixedSize(230, 250);
+
+    pbAddOrder = new QPushButton("+");
+    connect(pbAddOrder, SIGNAL(clicked()), this, SLOT(activePbAddOrder()));
 
     pbClose = new QPushButton(tr("Закрыть"));
     connect(pbClose, SIGNAL(clicked()), this, SLOT(close()));
@@ -42,15 +46,15 @@ ClientWindow::ClientWindow(QWidget *parent)
 
     QVBoxLayout *rightLayout = new QVBoxLayout;
     rightLayout->addWidget(listOrders);
+    rightLayout->addWidget(pbAddOrder);
 
     QHBoxLayout *infoLayout = new QHBoxLayout;
     infoLayout->addLayout(leftLayout, 1);
-    infoLayout->addWidget(listOrders);
+    infoLayout->addLayout(rightLayout);
 
     // ordering information
     QLabel *lbNumberText = new QLabel("№ ");
     lbNumberOrder = new QLabel("0");
-    //lbNumberOrder->setAlignment(Qt::AlignLeft);
     QLabel *lbReceptionDate = new QLabel("Дата обращения: ");
     deReceptionDate = new QDateEdit;
 
@@ -116,7 +120,7 @@ ClientWindow::ClientWindow(QWidget *parent)
     orderLayout->addLayout(diagnosisLayout);
 
 
-    QGroupBox *orderGroupBox = new QGroupBox(tr("Заказ"));
+    orderGroupBox = new QGroupBox(tr("Заказ"));
     orderGroupBox->setFlat(true);
     orderGroupBox->setLayout(orderLayout);
 
@@ -127,7 +131,7 @@ ClientWindow::ClientWindow(QWidget *parent)
 
     setLayout(mainLayout);
 
-    //setFixedSize(600, 300);
+    setFixedSize(500, 600);
     setWindowTitle(tr("Окно клиента"));
 }
 
@@ -148,6 +152,9 @@ void ClientWindow::setAddress(QString address)
 
 void ClientWindow::setOrdersList(QStringList list)
 {
+    if(list.size() == 0)
+        orderGroupBox->setDisabled(true);
+    else
     listOrders->setModel( new QStringListModel(list));
 }
 
@@ -165,4 +172,16 @@ void ClientWindow::setOrderData(QStringList list)
 void ClientWindow::activeCurrentOrder(const QModelIndex &index)
 {
     emit viewCurrentOrder(index.row());
+}
+
+void ClientWindow::activePbAddOrder()
+{
+    Order order;
+    order.setReceptionDate(deReceptionDate->date());
+    order.setPayment((Order::Payment)cbPayment->count());
+    order.setDeliveryDate(deDeliveryDate->date());
+    order.setArticle((Order::Article)cbArticle->count());
+    order.setDiagnosis(teDiagnosis->toPlainText());
+
+    emit pushAddOrder(order);
 }
