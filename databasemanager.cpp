@@ -243,6 +243,8 @@ bool DataBaseManager::getClient(int id, Client *client)
         client->setPatronymic(query.value(3).toString());
         client->setYear(query.value(4).toInt());
         client->setAddr(query.value(5).toString());
+        client->setDisability((Client::Disability)query.value(6).toInt());
+        client->setGroup((Client::Group)query.value(7).toInt());
     }
     return true;
 }
