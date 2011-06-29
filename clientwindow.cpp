@@ -30,6 +30,8 @@ ClientWindow::ClientWindow(QWidget *parent)
     pbAddOrder = new QPushButton("+");
     connect(pbAddOrder, SIGNAL(clicked()), this, SLOT(activePbAddOrder()));
 
+    pbDelOrder = new QPushButton("-");
+
     pbClose = new QPushButton(tr("Закрыть"));
     connect(pbClose, SIGNAL(clicked()), this, SLOT(close()));
 
@@ -44,9 +46,13 @@ ClientWindow::ClientWindow(QWidget *parent)
     leftLayout->addLayout(addrLayout);
     leftLayout->addStretch();
 
+    QHBoxLayout *rightButtonLayout = new QHBoxLayout;
+    rightButtonLayout->addWidget(pbAddOrder);
+    rightButtonLayout->addWidget(pbDelOrder);
+
     QVBoxLayout *rightLayout = new QVBoxLayout;
     rightLayout->addWidget(listOrders);
-    rightLayout->addWidget(pbAddOrder);
+    rightLayout->addLayout(rightButtonLayout);
 
     QHBoxLayout *infoLayout = new QHBoxLayout;
     infoLayout->addLayout(leftLayout, 1);
@@ -57,6 +63,7 @@ ClientWindow::ClientWindow(QWidget *parent)
     lbNumberOrder = new QLabel("0");
     QLabel *lbReceptionDate = new QLabel("Дата обращения: ");
     deReceptionDate = new QDateEdit;
+    deReceptionDate->setDisplayFormat("dd.MM.yyyy");
 
     QLabel *lbPayment = new QLabel("Вид оплаты: ");
     cbPayment = new QComboBox;
@@ -78,8 +85,9 @@ ClientWindow::ClientWindow(QWidget *parent)
             << "Головодержатель");
     cbArticle->addItems(listArticle);
 
-    QLabel *lbDelivery = new QLabel("дата выдачи изделия ");
+    QLabel *lbDelivery = new QLabel("Дата выдачи изделия ");
     deDeliveryDate = new QDateEdit;
+    deDeliveryDate->setDisplayFormat("dd.MM.yyyy");
 
     QLabel *lbDiagnosis = new QLabel(tr("Диагноз: "));
     lbDiagnosis->setAlignment(Qt::AlignTop);
@@ -106,6 +114,7 @@ ClientWindow::ClientWindow(QWidget *parent)
 
     QHBoxLayout *deliveryLayout = new QHBoxLayout;
     deliveryLayout->addWidget(lbDelivery);
+    deliveryLayout->addStretch();
     deliveryLayout->addWidget(deDeliveryDate);
 
     QHBoxLayout *diagnosisLayout = new QHBoxLayout;
@@ -152,9 +161,6 @@ void ClientWindow::setAddress(QString address)
 
 void ClientWindow::setOrdersList(QStringList list)
 {
-    if(list.size() == 0)
-        orderGroupBox->setDisabled(true);
-    else
     listOrders->setModel( new QStringListModel(list));
 }
 

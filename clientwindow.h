@@ -40,6 +40,7 @@ class ClientWindow: public QDialog, public IViewClientForm
   private:
     QPushButton *pbClose;
     QPushButton *pbAddOrder;
+    QPushButton *pbDelOrder;
     QListView *listOrders;
     QGroupBox *orderGroupBox;
 

@@ -65,9 +65,9 @@ QStringList ClientPresenter::createOrdersStringList()
 
     for (int i = 0; i < clientOrders.size(); i++)
     {
-        list << (QString::number(clientOrders.at(i)->getID()) + " "
-            + (clientOrders.at(i)->getDeliveryDate()).toString() + " "
-            + clientOrders.at(i)->getArticleToString());
+        list << (QString::number(clientOrders.at(i)->getID()) + ".  "
+            + clientOrders.at(i)->getArticleToString() + ",  "
+            + (clientOrders.at(i)->getDeliveryDate()).toString("dd MMMM yyyy"));
     }
 
     return list;
