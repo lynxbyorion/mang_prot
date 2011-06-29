@@ -177,11 +177,8 @@ bool DataBaseManager::insertOrderInDB(Order order)
             " deliverydate, diagnosis, article) "
             " VALUES(?, ?, ?, ?, ?, ?, ?)");
     query.bindValue(0, getMaxOrderID() + 1);
-    qDebug() <<  "id order = " << getMaxOrderID() +1;
     query.bindValue(1, order.getIDClient());
-    qDebug() <<  "id client = " << order.getIDClient();
     query.bindValue(2, order.getPayment());
-    qDebug() <<  "payment = " << order.getPayment();
     query.bindValue(3, order.getReceptionDate());
     query.bindValue(4, order.getDeliveryDate());
     query.bindValue(5, order.getDiagnosis());

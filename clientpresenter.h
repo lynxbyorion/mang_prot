@@ -30,6 +30,8 @@ class ClientPresenter: public QObject
     QStringList createOrdersStringList();
     QStringList orderToStringList(int indexList);
 
+    void refresh();
+
   private slots:
     void activeCurrentOrder(const int);
     void addOrder(Order &);

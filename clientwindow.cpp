@@ -131,7 +131,7 @@ ClientWindow::ClientWindow(QWidget *parent)
 
     setLayout(mainLayout);
 
-    setFixedSize(500, 600);
+    setFixedSize(500, 700);
     setWindowTitle(tr("Окно клиента"));
 }
 
@@ -178,9 +178,9 @@ void ClientWindow::activePbAddOrder()
 {
     Order order;
     order.setReceptionDate(deReceptionDate->date());
-    order.setPayment((Order::Payment)cbPayment->count());
+    order.setPayment((Order::Payment)cbPayment->currentIndex());
     order.setDeliveryDate(deDeliveryDate->date());
-    order.setArticle((Order::Article)cbArticle->count());
+    order.setArticle((Order::Article)cbArticle->currentIndex());
     order.setDiagnosis(teDiagnosis->toPlainText());
 
     emit pushAddOrder(order);

@@ -27,6 +27,7 @@ ClientPresenter::ClientPresenter(DataBaseManager *db, int id,IViewClientForm *vi
 void ClientPresenter::initialize(int id)
 {
     client = new Client();
+
     dbManager->getClient(id, client);
     dbManager->getClientOrders(id, clientOrders);
 
@@ -86,6 +87,15 @@ QStringList ClientPresenter::orderToStringList(int indexList)
      return list;
 }
 
+void ClientPresenter::refresh()
+{
+    clientOrders.clear();
+    dbManager->getClientOrders(client->getID(), clientOrders);
+
+    clientForm->setOrdersList(createOrdersStringList());
+    clientForm->setOrderData(orderToStringList(0));
+}
+
 // slots
 void ClientPresenter::activeCurrentOrder(const int index)
 {
@@ -95,7 +105,6 @@ void ClientPresenter::activeCurrentOrder(const int index)
 void ClientPresenter::addOrder(Order &order)
 {
     order.setIDClient(client->getID());
-    qDebug() << "id client: " << client->getID();
-    qDebug() << "id order in addOrder: " << order.getIDClient();
     dbManager->insertOrderInDB(order);
+    refresh();
 }
