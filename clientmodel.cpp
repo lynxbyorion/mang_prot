@@ -1,6 +1,8 @@
 #include <QDebug>
 
 #include "clientmodel.h"
+
+#include "databasemanager.h"
 #include "defandpar.h"
 
 Client::Client()
@@ -41,4 +43,17 @@ QString Client::getGroupToString()
           qDebug() << "Error: client->getGroupToString()";
           return "";
     }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+ClientModel::ClientModel()
+    :db(DataBaseManager::getInstance())
+{
+}
+
+Client ClientModel::getClient(int id)
+{
+    Client *client = new Client();
+    db->getClient(id, client);
 }

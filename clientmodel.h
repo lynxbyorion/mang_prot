@@ -11,6 +11,8 @@
 
 #include <QString>
 
+class DataBaseManager;
+
 class Client
 {
   public:
@@ -62,4 +64,22 @@ class Client
     Group group;
 
 };
+
+/**
+ *  @short This model for client.
+ */
+class ClientModel
+{
+  public:
+    ClientModel();
+
+    /**
+     * Get instance Client by ID.
+     */
+    Client getClient(int id);
+
+  private:
+    DataBaseManager* db;
+};
+
 #endif //CLIENTMODEL_H
