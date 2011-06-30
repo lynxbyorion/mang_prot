@@ -15,11 +15,24 @@
 class Client;
 class Order;
 
+/**
+ *  @short Class open datebase connection.
+ *
+ *  This class is created uses pattern Singleton. His created
+ *  only one instance using method getInstance() and provides an
+ *  interface for SQL query.
+ */
 class DataBaseManager: public QObject
 {
   public:
+    /**
+     *  Create an instance of class if don't exists.
+     */
     static DataBaseManager* getInstance();
 
+    /**
+     *  Close database and destoys instance
+     */
     ~DataBaseManager();
 
   public:
