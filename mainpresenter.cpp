@@ -18,18 +18,7 @@ MainPresenter::MainPresenter(IViewForm *view, QObject *perent)
     QObject::connect(view_obj, SIGNAL(actionReturnIndex(const int)),
             this, SLOT(createClientWindow(const int)));
 
-    dbManager = new DataBaseManager();
-    if (!dbManager->dbOpen())
-    {
-        QMessageBox msgBox;
-        msgBox.setWindowTitle("Ошибка!");
-        msgBox.setText("Не могу подключиться к базе данных.");
-        msgBox.setStandardButtons(QMessageBox::Ok);
-        msgBox.setIcon(QMessageBox::Critical);
-        msgBox.exec();
-        exit(1);
-
-    }
+    dbManager = DataBaseManager::getInstance();
 
     findClients();
 
@@ -90,7 +79,7 @@ void MainPresenter::createClientWindow(const int index)
     const int id = (clients.at(index))->getID();
 
     ClientWindow *window = new ClientWindow();
-    ClientPresenter *presenter = new ClientPresenter(dbManager, id, window, this);
+    ClientPresenter *presenter = new ClientPresenter(id, window, this);
     Q_UNUSED(presenter);
 
     window->exec();

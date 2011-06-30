@@ -8,11 +8,11 @@
 
 #include <QDebug>
 
-ClientPresenter::ClientPresenter(DataBaseManager *db, int id,IViewClientForm *view,
+ClientPresenter::ClientPresenter(int id,IViewClientForm *view,
                 QObject *parent)
     :QObject(parent), clientForm(view)
 {
-    dbManager = db;
+    dbManager = DataBaseManager::getInstance();
     QObject* view_obj = dynamic_cast<QObject*>(view);
 
     QObject::connect(view_obj, SIGNAL(viewCurrentOrder(const int)),

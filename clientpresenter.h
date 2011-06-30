@@ -20,7 +20,7 @@ class ClientPresenter: public QObject
     Q_OBJECT
 
   public:
-    explicit ClientPresenter(DataBaseManager *db, int id,IViewClientForm *view,
+    explicit ClientPresenter(int id,IViewClientForm *view,
                     QObject *parent = 0);
 
   private:

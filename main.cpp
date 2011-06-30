@@ -3,6 +3,7 @@
 
 #include "mainform.h"
 #include "mainpresenter.h"
+#include "databasemanager.h"
 
 void initCodec(const char *codecName)
 {
@@ -16,6 +17,10 @@ int main( int argc, char *argv[] )
 {
     initCodec("UTF-8");
     QApplication app(argc, argv);
+
+    DataBaseManager *db;
+    db = DataBaseManager::getInstance();
+    Q_UNUSED(db);
 
     MainForm* mainWindow = new MainForm();
     MainPresenter* presenter = new MainPresenter(mainWindow);

@@ -12,11 +12,40 @@
 DataBaseManager::DataBaseManager(QObject *parent)
     :QObject(parent)
 {
+    if (!dbOpen())
+    {
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("Ошибка!");
+        msgBox.setText("Не могу подключиться к базе данных.");
+        msgBox.setStandardButtons(QMessageBox::Ok);
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+        exit(1);
+
+    }
 }
 
 DataBaseManager::~DataBaseManager()
 {
     db.close();
+    delete single;
+    instanceFlag = false;
+}
+
+bool DataBaseManager::instanceFlag = false;
+
+DataBaseManager* DataBaseManager::single = NULL;
+
+DataBaseManager* DataBaseManager::getInstance()
+{
+    if (!instanceFlag) {
+        single = new DataBaseManager();
+        instanceFlag = true;
+        return single;
+    }
+    else {
+        return single;
+    }
 }
 
 bool DataBaseManager::dbOpen()

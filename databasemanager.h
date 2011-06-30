@@ -18,12 +18,11 @@ class Order;
 class DataBaseManager: public QObject
 {
   public:
-    DataBaseManager(QObject *prarent = 0);
+    static DataBaseManager* getInstance();
+
     ~DataBaseManager();
 
   public:
-    bool dbOpen();
-    //bool dbClose();
     int getMaxID();
     int getMaxOrderID();
     bool insertClientInDB(Client);
@@ -35,6 +34,13 @@ class DataBaseManager: public QObject
     bool getClientOrders( int idClient, QList<Order*> &ordersList);
 
   private:
+    DataBaseManager(QObject *prarent = 0);
+    bool dbOpen();
+
+  private:
+    static DataBaseManager *single;
+    static bool instanceFlag;
+
     QSqlDatabase db;
 
 };
