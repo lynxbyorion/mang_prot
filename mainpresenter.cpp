@@ -78,7 +78,7 @@ void MainPresenter::createClientWindow(const int index)
 {
     const int id = (clients.at(index))->getID();
 
-    ClientWindow *window = new ClientWindow();
+    ClientWindow *window = new ClientWindow(id);
     ClientPresenter *presenter = new ClientPresenter(id, window, this);
     Q_UNUSED(presenter);
 

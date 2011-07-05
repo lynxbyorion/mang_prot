@@ -3,15 +3,18 @@
 #include <QDebug>
 
 #include "clientwindow.h"
+#include "clientpresenter.h"
 
 #include "databasemanager.h"
 #include "clientmodel.h"
 #include "clientorder.h"
 
-ClientWindow::ClientWindow(QWidget *parent)
+ClientWindow::ClientWindow(const int id, QWidget *parent)
     :QDialog(parent)
 {
-    lbName = new QLabel();
+    choosePresenter(id);
+
+    lbName = new QLabel(presenter->getClient()->getName());
     lbName->setWordWrap(true);
 
     lbDis = new QLabel();
@@ -142,6 +145,11 @@ ClientWindow::ClientWindow(QWidget *parent)
 
     setFixedSize(500, 700);
     setWindowTitle(tr("Окно клиента"));
+}
+
+void ClientWindow::choosePresenter(const int id)
+{
+    presenter = new ClientPresenter(id);
 }
 
 void ClientWindow::setFullName(QString name)

@@ -14,6 +14,7 @@ class QModelIndex;
 class QGroupBox;
 
 class Order;
+class ClientPresenter;
 
 
 class ClientWindow: public QDialog, public IViewClientForm
@@ -21,7 +22,9 @@ class ClientWindow: public QDialog, public IViewClientForm
     Q_OBJECT
 
   public:
-    explicit ClientWindow(QWidget *parent = 0);
+    explicit ClientWindow(const int id, QWidget *parent = 0);
+
+    void choosePresenter(const int);
 
     void setFullName(QString);
     void setDisability(QString);
@@ -38,6 +41,8 @@ class ClientWindow: public QDialog, public IViewClientForm
     void activePbAddOrder();
 
   private:
+    ClientPresenter *presenter;
+
     QPushButton *pbClose;
     QPushButton *pbAddOrder;
     QPushButton *pbDelOrder;

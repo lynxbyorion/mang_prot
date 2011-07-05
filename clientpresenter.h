@@ -14,14 +14,18 @@ class IViewClientForm;
 class DataBaseManager;
 class Client;
 class Order;
+class ClientModel;
 
 class ClientPresenter: public QObject
 {
     Q_OBJECT
 
   public:
+    explicit ClientPresenter(const int id_);
     explicit ClientPresenter(int id,IViewClientForm *view,
                     QObject *parent = 0);
+
+    Client *getClient() {return client;}
 
   private:
     void initialize(int id);
@@ -37,6 +41,8 @@ class ClientPresenter: public QObject
     void addOrder(Order &);
 
   private:
+    ClientModel *model;
+
     Client *client;
     QList<Order*> clientOrders;
     DataBaseManager *dbManager;

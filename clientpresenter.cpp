@@ -8,6 +8,12 @@
 
 #include <QDebug>
 
+ClientPresenter::ClientPresenter(const int id_)
+{
+    model = new ClientModel();
+    client = new Client(model->getClient(id_));
+}
+
 ClientPresenter::ClientPresenter(int id,IViewClientForm *view,
                 QObject *parent)
     :QObject(parent), clientForm(view)
