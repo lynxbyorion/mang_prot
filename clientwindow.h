@@ -22,9 +22,9 @@ class ClientWindow: public QDialog, public IViewClientForm
     Q_OBJECT
 
   public:
-    explicit ClientWindow(const int id, QWidget *parent = 0);
+    explicit ClientWindow(QWidget *parent = 0);
 
-    void choosePresenter(const int);
+    void choosePresenter(ClientPresenter *);
 
     void setFullName(QString);
     void setDisability(QString);

@@ -11,24 +11,26 @@
 ClientPresenter::ClientPresenter(const int id_)
 {
     model = new ClientModel();
-    client = new Client(model->getClient(id_));
+    model->getClient(id_);
 }
 
-ClientPresenter::ClientPresenter(int id,IViewClientForm *view,
-                QObject *parent)
-    :QObject(parent), clientForm(view)
-{
-    dbManager = DataBaseManager::getInstance();
-    QObject* view_obj = dynamic_cast<QObject*>(view);
-
-    QObject::connect(view_obj, SIGNAL(viewCurrentOrder(const int)),
-            this, SLOT(activeCurrentOrder(const int)));
-    QObject::connect(view_obj, SIGNAL(pushAddOrder(Order &)),
-            this, SLOT(addOrder(Order &)));
-
-    initialize(id);
-
-}
+/*
+ *ClientPresenter::ClientPresenter(int id,IViewClientForm *view,
+ *                QObject *parent)
+ *    :QObject(parent), clientForm(view)
+ *{
+ *    dbManager = DataBaseManager::getInstance();
+ *    QObject* view_obj = dynamic_cast<QObject*>(view);
+ *
+ *    QObject::connect(view_obj, SIGNAL(viewCurrentOrder(const int)),
+ *            this, SLOT(activeCurrentOrder(const int)));
+ *    QObject::connect(view_obj, SIGNAL(pushAddOrder(Order &)),
+ *            this, SLOT(addOrder(Order &)));
+ *
+ *    initialize(id);
+ *
+ *}
+ */
 
 void ClientPresenter::initialize(int id)
 {

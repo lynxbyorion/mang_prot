@@ -9,12 +9,10 @@
 #include "clientmodel.h"
 #include "clientorder.h"
 
-ClientWindow::ClientWindow(const int id, QWidget *parent)
+ClientWindow::ClientWindow(QWidget *parent /* =0 */)
     :QDialog(parent)
 {
-    choosePresenter(id);
-
-    lbName = new QLabel(presenter->getClient()->getName());
+    lbName = new QLabel();
     lbName->setWordWrap(true);
 
     lbDis = new QLabel();
@@ -147,9 +145,9 @@ ClientWindow::ClientWindow(const int id, QWidget *parent)
     setWindowTitle(tr("Окно клиента"));
 }
 
-void ClientWindow::choosePresenter(const int id)
+void ClientWindow::choosePresenter(ClientPresenter *presenter_)
 {
-    presenter = new ClientPresenter(id);
+    presenter = presenter_;
 }
 
 void ClientWindow::setFullName(QString name)

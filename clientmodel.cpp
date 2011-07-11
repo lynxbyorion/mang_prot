@@ -50,10 +50,14 @@ QString Client::getGroupToString()
 ClientModel::ClientModel()
     :db(DataBaseManager::getInstance())
 {
+
 }
 
 Client ClientModel::getClient(int id)
 {
     Client *client = new Client();
     db->getClient(id, client);
+
+    return *client;
 }
+
