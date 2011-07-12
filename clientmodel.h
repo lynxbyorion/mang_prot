@@ -12,6 +12,7 @@
 #include <QString>
 
 class DataBaseManager;
+class Order;
 
 class Client
 {
@@ -76,7 +77,11 @@ class ClientModel
     /**
      * Get instance Client by ID.
      */
-    Client getClient(int id);
+    Client& getClient(int id);
+    /*
+     * Get client orders
+     */
+    void getClientOrders(int id, QList<Order*> &clientOrders);
 
   private:
     DataBaseManager* db;

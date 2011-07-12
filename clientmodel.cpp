@@ -53,11 +53,16 @@ ClientModel::ClientModel()
 
 }
 
-Client ClientModel::getClient(int id)
+Client& ClientModel::getClient(int id)
 {
     Client *client = new Client();
     db->getClient(id, client);
 
     return *client;
+}
+
+void ClientModel::getClientOrders(int id, QList<Order*> &ordersList)
+{
+    db->getClientOrders(id, ordersList);
 }
 

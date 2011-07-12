@@ -80,8 +80,8 @@ void MainPresenter::createClientWindow(const int index)
 
     ClientWindow *window = new ClientWindow();
     ClientPresenter *presenter = new ClientPresenter(id);
+    presenter->setView(window);
     window->choosePresenter(presenter);
-    //Q_UNUSED(presenter);
 
     window->exec();
 }

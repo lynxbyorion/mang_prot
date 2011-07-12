@@ -11,7 +11,7 @@
 ClientPresenter::ClientPresenter(const int id_)
 {
     model = new ClientModel();
-    model->getClient(id_);
+    client = new Client(model->getClient(id_));
 }
 
 /*
@@ -32,12 +32,14 @@ ClientPresenter::ClientPresenter(const int id_)
  *}
  */
 
-void ClientPresenter::initialize(int id)
+void ClientPresenter::setView(IViewClientForm *win_)
 {
-    client = new Client();
+    clientForm = win_;
+    initialize();
+}
 
-    dbManager->getClient(id, client);
-    dbManager->getClientOrders(id, clientOrders);
+void ClientPresenter::initialize()
+{
 
     clientForm->setFullName(createFullNameString());
     clientForm->setDisability(createDisabilityString());
@@ -98,7 +100,7 @@ QStringList ClientPresenter::orderToStringList(int indexList)
 void ClientPresenter::refresh()
 {
     clientOrders.clear();
-    dbManager->getClientOrders(client->getID(), clientOrders);
+    model->getClientOrders(client->getID(), clientOrders);
 
     clientForm->setOrdersList(createOrdersStringList());
     clientForm->setOrderData(orderToStringList(0));
@@ -113,6 +115,6 @@ void ClientPresenter::activeCurrentOrder(const int index)
 void ClientPresenter::addOrder(Order &order)
 {
     order.setIDClient(client->getID());
-    dbManager->insertOrderInDB(order);
+    //dbManager->insertOrderInDB(order);
     refresh();
 }

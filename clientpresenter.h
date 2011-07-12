@@ -15,6 +15,7 @@ class DataBaseManager;
 class Client;
 class Order;
 class ClientModel;
+class ClientWindow;
 
 class ClientPresenter: public QObject
 {
@@ -26,9 +27,10 @@ class ClientPresenter: public QObject
                     QObject *parent = 0);
 
     Client *getClient() {return client;}
+    void setView(IViewClientForm *);
 
   private:
-    void initialize(int id);
+    void initialize();
     QString createFullNameString();
     QString createDisabilityString();
     QStringList createOrdersStringList();
@@ -45,7 +47,6 @@ class ClientPresenter: public QObject
 
     Client *client;
     QList<Order*> clientOrders;
-    DataBaseManager *dbManager;
 
     IViewClientForm *clientForm;
 };
