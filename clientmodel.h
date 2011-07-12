@@ -82,6 +82,10 @@ class ClientModel
      * Get client orders
      */
     void getClientOrders(int id, QList<Order*> &clientOrders);
+    /*
+     * insert order
+     */
+    void insertOrder(Order &);
 
   private:
     DataBaseManager* db;

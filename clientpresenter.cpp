@@ -12,6 +12,7 @@ ClientPresenter::ClientPresenter(const int id_)
 {
     model = new ClientModel();
     client = new Client(model->getClient(id_));
+    model->getClientOrders(client->getID(), clientOrders);
 }
 
 /*
@@ -22,10 +23,6 @@ ClientPresenter::ClientPresenter(const int id_)
  *    dbManager = DataBaseManager::getInstance();
  *    QObject* view_obj = dynamic_cast<QObject*>(view);
  *
- *    QObject::connect(view_obj, SIGNAL(viewCurrentOrder(const int)),
- *            this, SLOT(activeCurrentOrder(const int)));
- *    QObject::connect(view_obj, SIGNAL(pushAddOrder(Order &)),
- *            this, SLOT(addOrder(Order &)));
  *
  *    initialize(id);
  *
@@ -36,10 +33,19 @@ void ClientPresenter::setView(IViewClientForm *win_)
 {
     clientForm = win_;
     initialize();
+    refresh();
 }
 
 void ClientPresenter::initialize()
 {
+    // FIXME this connections need rewrite
+    QObject* view_obj = dynamic_cast<QObject*>(clientForm);
+    QObject::connect(view_obj, SIGNAL(viewCurrentOrder(const int)),
+            this, SLOT(activeCurrentOrder(const int)));
+    QObject::connect(view_obj, SIGNAL(pushAddOrder(Order &)),
+            this, SLOT(addOrder(Order &)));
+    QObject::connect(view_obj, SIGNAL(pushRemoveOrder(const int)),
+            this, SLOT(removeOrder(const int)));
 
     clientForm->setFullName(createFullNameString());
     clientForm->setDisability(createDisabilityString());
@@ -99,11 +105,13 @@ QStringList ClientPresenter::orderToStringList(int indexList)
 
 void ClientPresenter::refresh()
 {
-    clientOrders.clear();
-    model->getClientOrders(client->getID(), clientOrders);
+    if(clientOrders.size()) {
+        clientOrders.clear();
+        model->getClientOrders(client->getID(), clientOrders);
 
-    clientForm->setOrdersList(createOrdersStringList());
-    clientForm->setOrderData(orderToStringList(0));
+        clientForm->setOrdersList(createOrdersStringList());
+        clientForm->setOrderData(orderToStringList(0));
+    }
 }
 
 // slots
@@ -115,6 +123,10 @@ void ClientPresenter::activeCurrentOrder(const int index)
 void ClientPresenter::addOrder(Order &order)
 {
     order.setIDClient(client->getID());
-    //dbManager->insertOrderInDB(order);
+    model->insertOrder(order);
     refresh();
+}
+
+void ClientPresenter::removeOrder(const int idx)
+{
 }

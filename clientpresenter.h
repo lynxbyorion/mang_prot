@@ -26,7 +26,6 @@ class ClientPresenter: public QObject
     explicit ClientPresenter(int id,IViewClientForm *view,
                     QObject *parent = 0);
 
-    Client *getClient() {return client;}
     void setView(IViewClientForm *);
 
   private:
@@ -41,6 +40,7 @@ class ClientPresenter: public QObject
   private slots:
     void activeCurrentOrder(const int);
     void addOrder(Order &);
+    void removeOrder(const int);
 
   private:
     ClientModel *model;

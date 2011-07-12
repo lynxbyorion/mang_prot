@@ -66,3 +66,7 @@ void ClientModel::getClientOrders(int id, QList<Order*> &ordersList)
     db->getClientOrders(id, ordersList);
 }
 
+void ClientModel::insertOrder(Order &order)
+{
+    db->insertOrderInDB(order);
+}
