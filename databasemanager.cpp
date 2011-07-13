@@ -222,6 +222,20 @@ bool DataBaseManager::insertOrderInDB(Order &order)
     return false;
 }
 
+bool DataBaseManager::removeOrderInDB(const int idx_)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM clientorder WHERE idorder = ?");
+    query.bindValue(0, idx_);
+    if(!query.exec())
+        qDebug() << query.lastError();
+    else {
+        qDebug() << "Delete order";
+        return true;
+    }
+    return false;
+}
+
 bool DataBaseManager::getClients( QString lastName, QString firstName,
         QString middleName, QList<Client*> &clientsList)
 {

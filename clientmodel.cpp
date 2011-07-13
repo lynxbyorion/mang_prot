@@ -70,3 +70,8 @@ void ClientModel::insertOrder(Order &order)
 {
     db->insertOrderInDB(order);
 }
+
+void ClientModel::removeOrder(const int idx_)
+{
+    db->removeOrderInDB(idx_);
+}

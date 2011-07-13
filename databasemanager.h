@@ -40,6 +40,7 @@ class DataBaseManager: public QObject
     int getMaxOrderID();
     bool insertClientInDB(Client &);
     bool insertOrderInDB(Order &);
+    bool removeOrderInDB(const int idx_);
 
     bool getClients( QString lastName, QString firstName,
             QString middleName, QList<Client*> &clients);

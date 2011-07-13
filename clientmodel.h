@@ -69,7 +69,7 @@ class Client
 /**
  *  @short This model for client.
  */
-class ClientModel
+class ClientModel: public QObject
 {
   public:
     ClientModel();
@@ -86,6 +86,10 @@ class ClientModel
      * insert order
      */
     void insertOrder(Order &);
+    /**
+     * remove order
+     */
+    void removeOrder(const int idx_);
 
   private:
     DataBaseManager* db;
