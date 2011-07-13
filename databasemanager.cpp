@@ -172,7 +172,7 @@ int DataBaseManager::getMaxOrderID()
     return id;
 }
 
-bool DataBaseManager::insertClientInDB(Client client)
+bool DataBaseManager::insertClientInDB(Client &client)
 {
     QSqlQuery query;
 
@@ -198,7 +198,7 @@ bool DataBaseManager::insertClientInDB(Client client)
 
 }
 
-bool DataBaseManager::insertOrderInDB(Order order)
+bool DataBaseManager::insertOrderInDB(Order &order)
 {
     QSqlQuery query;
 

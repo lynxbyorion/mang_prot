@@ -38,8 +38,8 @@ class DataBaseManager: public QObject
   public:
     int getMaxID();
     int getMaxOrderID();
-    bool insertClientInDB(Client);
-    bool insertOrderInDB(Order);
+    bool insertClientInDB(Client &);
+    bool insertOrderInDB(Order &);
 
     bool getClients( QString lastName, QString firstName,
             QString middleName, QList<Client*> &clients);
