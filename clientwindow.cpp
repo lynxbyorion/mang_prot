@@ -32,6 +32,7 @@ ClientWindow::ClientWindow(QWidget *parent /* =0 */)
     connect(pbAddOrder, SIGNAL(clicked()), this, SLOT(activePbAddOrder()));
 
     pbDelOrder = new QPushButton("-");
+    connect(pbDelOrder, SIGNAL(clicked()), this, SLOT(pushPbDelOrder()));
 
     pbClose = new QPushButton(tr("Закрыть"));
     connect(pbClose, SIGNAL(clicked()), this, SLOT(close()));
@@ -196,4 +197,10 @@ void ClientWindow::activePbAddOrder()
     order.setDiagnosis(teDiagnosis->toPlainText());
 
     emit pushAddOrder(order);
+}
+
+void ClientWindow::pushPbDelOrder()
+{
+    emit activeRemoveOrder(listOrders->currentIndex().row());
+    qDebug() << "current index = " << listOrders->currentIndex().row();
 }

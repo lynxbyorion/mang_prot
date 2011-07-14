@@ -35,10 +35,12 @@ class ClientWindow: public QDialog, public IViewClientForm
   signals:
     void viewCurrentOrder(const int);
     void pushAddOrder(Order &);
+    void activeRemoveOrder(const int);
 
   private slots:
     void activeCurrentOrder(const QModelIndex &);
     void activePbAddOrder();
+    void pushPbDelOrder();
 
   private:
     ClientPresenter *presenter;
