@@ -44,7 +44,7 @@ void ClientPresenter::initialize()
             this, SLOT(activeCurrentOrder(const int)));
     QObject::connect(view_obj, SIGNAL(pushAddOrder(Order &)),
             this, SLOT(addOrder(Order &)));
-    QObject::connect(view_obj, SIGNAL(pushRemoveOrder(const int)),
+    QObject::connect(view_obj, SIGNAL(activeRemoveOrder(const int)),
             this, SLOT(removeOrder(const int)));
 
     clientForm->setFullName(createFullNameString());
@@ -129,4 +129,6 @@ void ClientPresenter::addOrder(Order &order)
 
 void ClientPresenter::removeOrder(const int idx)
 {
+    model->removeOrder(clientOrders.at(idx)->getID());
+    refresh();
 }

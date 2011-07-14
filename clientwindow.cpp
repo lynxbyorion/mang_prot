@@ -201,6 +201,12 @@ void ClientWindow::activePbAddOrder()
 
 void ClientWindow::pushPbDelOrder()
 {
-    emit activeRemoveOrder(listOrders->currentIndex().row());
     qDebug() << "current index = " << listOrders->currentIndex().row();
+    if(listOrders->currentIndex().row() < 0)
+    {
+        QMessageBox::warning(this, tr("Будьте внимательны!"),
+                tr("Вы не выбрали заказ для удаления"), QMessageBox::Ok);
+    }
+    else
+        emit activeRemoveOrder(listOrders->currentIndex().row());
 }
