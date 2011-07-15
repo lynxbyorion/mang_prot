@@ -198,6 +198,24 @@ bool DataBaseManager::insertClientInDB(Client &client)
 
 }
 
+bool DataBaseManager::removeClient(const int clientid)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM clientorder WHERE idclient = ?");
+    query.bindValue(0, clientid);
+    if(!query.exec()) {
+        qDebug() << "EE in del order: " << query.lastError();
+        return false;
+    }
+    query.prepare("DELETE FROM clients WHERE id = ?");
+    query.bindValue(0, clientid);
+    if(!query.exec()) {
+        qDebug() << "EE in del client: " << query.lastError();
+        return false;
+    }
+    return true;
+}
+
 bool DataBaseManager::insertOrderInDB(Order &order)
 {
     QSqlQuery query;

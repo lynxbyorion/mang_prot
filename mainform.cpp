@@ -45,6 +45,9 @@ MainForm::MainForm(QWidget *parent)
     pbAdd = new QPushButton("Добавить");
     connect(pbAdd, SIGNAL(pressed()), this, SLOT(activeAddition()));
 
+    pbRemoveClient = new QPushButton(tr("Удалить"));
+    connect(pbRemoveClient, SIGNAL(clicked()), this, SLOT(removeClient()));
+
     // name label layout
     QHBoxLayout *lbLayout = new QHBoxLayout;
     lbLayout->addWidget(lbLastName);
@@ -79,6 +82,7 @@ MainForm::MainForm(QWidget *parent)
     QHBoxLayout *pbLayout = new QHBoxLayout;
     pbLayout->addStretch();
     pbLayout->addWidget(pbAdd);
+    pbLayout->addWidget(pbRemoveClient);
 
     // left layout
     QVBoxLayout *leftLayout = new QVBoxLayout;
@@ -209,4 +213,9 @@ void MainForm::activeAddition()
 void MainForm::activeClickOnItemList(const QModelIndex &index)
 {
     emit actionReturnIndex(index.row());
+}
+
+void MainForm::removeClient()
+{
+    emit(actionRemoveClient(listClient->currentIndex().row()));
 }

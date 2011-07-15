@@ -35,12 +35,14 @@ class MainForm: public QWidget, public IViewForm
   signals:
     void actionFindClient();
     void actionAddClient();
+    void actionRemoveClient(const int index);
     void actionReturnIndex(const int index);
 
   private slots:
     void activeSearch();
     void activeAddition();
     void activeClickOnItemList(const QModelIndex &);
+    void removeClient();
 
   private:
     QComboBox *cbYear;      // год рождения
@@ -51,6 +53,7 @@ class MainForm: public QWidget, public IViewForm
     QComboBox *cbCotegory;
     QTextEdit *teAddress;
     QPushButton *pbAdd;
+    QPushButton *pbRemoveClient;
     QListView *listClient;
 
 };

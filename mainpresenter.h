@@ -37,6 +37,10 @@ class MainPresenter: public QObject
      */
     void addClient();
     /**
+     * remove Client and his orders
+     */
+    void removeClient(const int);
+    /**
      * create client window
      */
     void createClientWindow(const int);

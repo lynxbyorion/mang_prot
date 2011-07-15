@@ -40,6 +40,10 @@ public: // signals
      */
     virtual void actionAddClient() = 0;
     /**
+     * emit when pressed button pbRemoveClient
+     */
+    virtual void actionRemoveClient(const int) = 0;
+    /**
      * emit end return index item of list
      */
     virtual void actionReturnIndex(const int) = 0;

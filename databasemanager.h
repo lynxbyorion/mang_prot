@@ -39,6 +39,7 @@ class DataBaseManager: public QObject
     int getMaxID();
     int getMaxOrderID();
     bool insertClientInDB(Client &);
+    bool removeClient(const int);
     bool insertOrderInDB(Order &);
     bool removeOrderInDB(const int idx_);
 

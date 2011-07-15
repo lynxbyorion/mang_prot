@@ -17,6 +17,8 @@ MainPresenter::MainPresenter(IViewForm *view, QObject *perent)
             this, SLOT(addClient()));
     QObject::connect(view_obj, SIGNAL(actionReturnIndex(const int)),
             this, SLOT(createClientWindow(const int)));
+    QObject::connect(view_obj, SIGNAL(actionRemoveClient(const int)),
+            this, SLOT(removeClient(const int)));
 
     dbManager = DataBaseManager::getInstance();
 
@@ -84,4 +86,10 @@ void MainPresenter::createClientWindow(const int index)
     window->choosePresenter(presenter);
 
     window->exec();
+}
+
+void MainPresenter::removeClient(const int index)
+{
+    dbManager->removeClient(clients.at(index)->getID());
+    findClients();
 }
