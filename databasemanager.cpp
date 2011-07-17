@@ -255,7 +255,8 @@ bool DataBaseManager::removeOrderInDB(const int idx_)
 }
 
 bool DataBaseManager::getClients( QString lastName, QString firstName,
-        QString middleName, QList<Client*> &clientsList)
+        QString middleName, int year, int disability, int group,
+        QList<Client*> &clientsList)
 {
     QSqlQuery query;
     query.prepare("SELECT * FROM clients WHERE lastname LIKE ? "
@@ -277,8 +278,21 @@ bool DataBaseManager::getClients( QString lastName, QString firstName,
         client->setSurname(query.value(1).toString());
         client->setName(query.value(2).toString());
         client->setPatronymic(query.value(3).toString());
-        client->setYear(query.value(4).toInt());
+        if(year == 0 || year == query.value(4).toInt())
+            client->setYear(query.value(4).toInt());
+        else
+            continue;
         client->setAddr(query.value(5).toString());
+        qDebug() << "value 6 = " << query.value(6).toInt();
+        if(disability == 0 || disability == -1 || disability == query.value(6).toInt()) {
+            client->setDisability((Client::Disability)query.value(6).toInt());
+            qDebug() << "in if disability";
+        } else
+            continue;
+        if(group == 0 || group == -1 || group == query.value(7).toInt())
+            client->setGroup((Client::Group)query.value(7).toInt());
+        else
+            continue;
         clientsList.append(client);
     }
 

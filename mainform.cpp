@@ -24,19 +24,27 @@ MainForm::MainForm(QWidget *parent)
     cbYear = new QComboBox;
     for(int year = MIN_YEAR; year < MAX_YEAR; year++)
         cbYear->addItem(QString::number(year));
-    cbYear->setCurrentIndex(60);
+    cbYear->setCurrentIndex(-1);
+    connect(cbYear, SIGNAL(activated(const QString &)),
+                this, SLOT(activeSearch()));
 
     QLabel *lbDis = new QLabel("Инвалид");
     cbDisability = new QComboBox;
-    QStringList listDisability(QStringList() << "войны"
+    QStringList listDisability(QStringList() << tr("неизвестно") << "войны"
             << "детства" << "труда" << "общего заболевания");
     cbDisability->addItems(listDisability);
     cbDisability->setCurrentIndex(-1);
+    connect(cbDisability, SIGNAL(activated(const QString &)),
+                this, SLOT(activeSearch()));
+
     cbCotegory = new QComboBox;
-    QStringList listCotegory(QStringList() << "III" << "II" << "I");
+    QStringList listCotegory(QStringList() << tr("Неизвестно")
+            << "III" << "II" << "I");
     cbCotegory->addItems(listCotegory);
     cbCotegory->setCurrentIndex(-1);
     cbCotegory->setFixedWidth(50);
+    connect(cbCotegory, SIGNAL(activated(const QString &)),
+                this, SLOT(activeSearch()));
     QLabel *lbGroup = new QLabel("группы");
 
     QLabel *lbAddress = new QLabel("Адрес:");
@@ -152,32 +160,31 @@ int MainForm::getYear() const
 Client::Disability MainForm::getDisability() const
 {
     switch(cbDisability->currentIndex()) {
-        case 0:
-            return Client::War;
         case 1:
-            return Client::Infancy;
+            return Client::War;
         case 2:
-            return Client::Work;
+            return Client::Infancy;
         case 3:
+            return Client::Work;
+        case 4:
             return Client::General;
         default:
-            qWarning() << "cbDisability is not identified";
-            return Client::General;
+            return Client::EmptyDisability;
     }
 }
 
 Client::Group MainForm::getGroup() const
 {
     switch(cbCotegory->currentIndex()) {
-        case 0:
-            return Client::GroupIII;
         case 1:
-            return Client::GroupII;
+            return Client::GroupIII;
         case 2:
+            return Client::GroupII;
+        case 3:
             return Client::GroupI;
         default:
             qWarning() << "cbCotegory is not identified";
-            return Client::GroupI;
+            return Client::EmptyGroup;
     }
 }
 

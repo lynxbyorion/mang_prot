@@ -43,8 +43,8 @@ class DataBaseManager: public QObject
     bool insertOrderInDB(Order &);
     bool removeOrderInDB(const int idx_);
 
-    bool getClients( QString lastName, QString firstName,
-            QString middleName, QList<Client*> &clients);
+    bool getClients( QString lastName, QString firstName, QString middleName,
+            int year, int disability,int group, QList<Client*> &clients);
     bool getClient( int, Client *);
     bool getClientOrders( int idClient, QList<Order*> &ordersList);
 

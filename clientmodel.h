@@ -19,14 +19,16 @@ class Client
   public:
     //! enumeration type of disability
     enum Disability {
-        War = 0,    //! disabled veteran
+        EmptyDisability = 0,
+        War,        //! disabled veteran
         Infancy,    //! disabled child
         Work,       //! disabled social work
         General     //! invalid common disease
     };
     //! Group disability
     enum Group {
-        GroupIII = 0,
+        EmptyGroup = 0,
+        GroupIII,
         GroupII,
         GroupI
     };

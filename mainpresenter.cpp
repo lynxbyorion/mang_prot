@@ -37,10 +37,16 @@ void MainPresenter::findClients()
     QString lastName = m_view->getLastName();
     QString firstName = m_view->getName();
     QString middleName = m_view->getPatronymic();
+    int year = m_view->getYear();
+    int disability = m_view->getDisability();
+    qDebug() << "Dis = " << disability;
+    int group = m_view->getGroup();
+    qDebug() << "Group = " << group;
 
     clients.clear();
 
-    dbManager->getClients(lastName, firstName, middleName, clients);
+    dbManager->getClients(lastName, firstName, middleName, year,
+            disability, group, clients);
 
     QStringList list;
     for (int i = 0; i < clients.size(); i++) {
@@ -74,6 +80,7 @@ void MainPresenter::addClient()
         msgBox.exec();
     }
     refreshView();
+    findClients();
 }
 
 void MainPresenter::createClientWindow(const int index)
@@ -91,5 +98,6 @@ void MainPresenter::createClientWindow(const int index)
 void MainPresenter::removeClient(const int index)
 {
     dbManager->removeClient(clients.at(index)->getID());
+    refreshView();
     findClients();
 }
