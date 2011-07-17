@@ -114,7 +114,9 @@ MainForm::MainForm(QWidget *parent)
     mainLayout->addLayout(leftLayout);
     mainLayout->addLayout(rightLayout);
 
-    setLayout(mainLayout);
+    QWidget *widget = new QWidget();
+    setCentralWidget(widget);
+    widget-> setLayout(mainLayout);
     setWindowTitle("Клиентская база");
 }
 

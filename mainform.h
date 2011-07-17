@@ -1,7 +1,7 @@
 #ifndef MAINFORM_H
 #define MAINFORM_H
 
-#include <QWidget>
+#include <QMainWindow>
 
 #include "iviewform.h"
 
@@ -13,11 +13,11 @@ class QPushButton;
 class QListView;
 class QModelIndex;
 
-class MainForm: public QWidget, public IViewForm
+class MainForm: public QMainWindow, public IViewForm
 {
     Q_OBJECT
   public:
-    explicit MainForm(QWidget *parent = 0);
+    explicit MainForm();
 
     void refresh();
 
