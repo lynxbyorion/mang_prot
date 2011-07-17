@@ -5,6 +5,8 @@
 
 #include "iviewform.h"
 
+class QMenu;
+class QAction;
 class QLineEdit;
 class QLabel;
 class QComboBox;
@@ -45,6 +47,13 @@ class MainForm: public QMainWindow, public IViewForm
     void removeClient();
 
   private:
+    void createMenu();
+    void createActions();
+
+  private:
+    QMenu *fileMenu;
+    QAction *actStatistics;
+
     QComboBox *cbYear;      // год рождения
     QLineEdit *leLastName;   // 
     QLineEdit *leName;

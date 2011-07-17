@@ -2,9 +2,12 @@
 #include "mainform.h"
 #include "defandpar.h"
 
-MainForm::MainForm(QWidget *parent)
-    : QWidget(parent)
+MainForm::MainForm()
 {
+
+    createActions();
+    createMenu();
+
     QLabel *lbLastName = new QLabel("Фамилия");
     leLastName = new QLineEdit();
     QLabel *lbName = new QLabel("Имя");
@@ -118,6 +121,21 @@ MainForm::MainForm(QWidget *parent)
     setCentralWidget(widget);
     widget-> setLayout(mainLayout);
     setWindowTitle("Клиентская база");
+}
+
+void MainForm::createMenu()
+{
+    fileMenu = new QMenu(tr("&Меню"), this);
+    fileMenu->addAction(actStatistics);
+
+    menuBar()->addMenu(fileMenu);
+}
+
+void MainForm::createActions()
+{
+    actStatistics = new QAction(tr("Статистика"), this);
+    actStatistics->setShortcut(tr("Ctrl+S"));
+
 }
 
 // interface implementation
