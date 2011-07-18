@@ -129,7 +129,11 @@ void MainForm::createMenu()
     fileMenu = new QMenu(tr("&Меню"), this);
     fileMenu->addAction(actStatistics);
 
+    helpMenu = new QMenu(tr("&Помощь"), this);
+    helpMenu->addAction(actAbout);
+
     menuBar()->addMenu(fileMenu);
+    menuBar()->addMenu(helpMenu);
 }
 
 void MainForm::createActions()
@@ -139,6 +143,18 @@ void MainForm::createActions()
     connect(actStatistics, SIGNAL(triggered()),
             this, SLOT(createStatisticWindow()));
 
+    actAbout = new QAction(tr("О программе"), this);
+    connect(actAbout, SIGNAL(triggered()), this, SLOT(about()));
+
+
+}
+
+void MainForm::about()
+{
+    QString details = QString("<b>mang_prot</b>") + '\n'
+            + QString(tr("Программа учёта клиентов и их заказов.")) + '\n'
+        + QString(APP_VERSION) + ' ' + QString(APP_DATE);
+    QMessageBox::about(this, tr("О Программе"), details);
 }
 
 // interface implementation

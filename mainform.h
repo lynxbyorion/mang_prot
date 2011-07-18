@@ -48,6 +48,7 @@ class MainForm: public QMainWindow, public IViewForm
     void activeClickOnItemList(const QModelIndex &);
     void removeClient();
     void createStatisticWindow();
+    void about();
 
   private:
     void createMenu();
@@ -55,7 +56,9 @@ class MainForm: public QMainWindow, public IViewForm
 
   private:
     QMenu *fileMenu;
+    QMenu *helpMenu;
     QAction *actStatistics;
+    QAction *actAbout;
 
     QComboBox *cbYear;      // год рождения
     QLineEdit *leLastName;   // 
