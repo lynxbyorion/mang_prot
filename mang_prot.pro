@@ -23,7 +23,8 @@ HEADERS += clientmodel.h \
            clientorder.h \
            clientpresenter.h \
            iviewform.h \
-           iviewclientform.h
+           iviewclientform.h\
+           statisticWindow.h
 
 SOURCES += clientmodel.cpp \
            mainpresenter.cpp \
@@ -32,4 +33,5 @@ SOURCES += clientmodel.cpp \
            mainform.cpp \
            clientwindow.cpp \
            clientorder.cpp \
-           clientpresenter.cpp
+           clientpresenter.cpp\
+           statisticwindow.cpp

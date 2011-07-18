@@ -15,6 +15,8 @@ class QPushButton;
 class QListView;
 class QModelIndex;
 
+class StatisticWindow;
+
 class MainForm: public QMainWindow, public IViewForm
 {
     Q_OBJECT
@@ -45,6 +47,7 @@ class MainForm: public QMainWindow, public IViewForm
     void activeAddition();
     void activeClickOnItemList(const QModelIndex &);
     void removeClient();
+    void createStatisticWindow();
 
   private:
     void createMenu();

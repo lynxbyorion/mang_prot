@@ -1,6 +1,7 @@
 #include <QtGui>
 #include "mainform.h"
 #include "defandpar.h"
+#include "statisticwindow.h"
 
 MainForm::MainForm()
 {
@@ -135,6 +136,8 @@ void MainForm::createActions()
 {
     actStatistics = new QAction(tr("Статистика"), this);
     actStatistics->setShortcut(tr("Ctrl+S"));
+    connect(actStatistics, SIGNAL(triggered()),
+            this, SLOT(createStatisticWindow()));
 
 }
 
@@ -245,4 +248,10 @@ void MainForm::activeClickOnItemList(const QModelIndex &index)
 void MainForm::removeClient()
 {
     emit(actionRemoveClient(listClient->currentIndex().row()));
+}
+
+void MainForm::createStatisticWindow()
+{
+    StatisticWindow statisticWindow;
+    statisticWindow.exec();
 }
