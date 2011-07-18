@@ -35,3 +35,9 @@ SOURCES += clientmodel.cpp \
            clientorder.cpp \
            clientpresenter.cpp\
            statisticwindow.cpp
+
+QMAKE_CXXFLAGS += -DAPP_DATE=\\\"`date +'\"%a_%b_%d,_%Y\"'`\\\"
+QMAKE_CXXFLAGS += -DAPP_VERSION=\\\"`git describe`\\\"
+
+
+################################################################

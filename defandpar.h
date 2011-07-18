@@ -14,4 +14,12 @@
 //! maximum number of year
 #define MAX_YEAR 2050
 
+#ifndef APP_DATE
+#define APP_DATE "1/1/1970"
+#endif
+
+#ifndef APP_VERSION
+#define APP_VERSION "local-dev"
+#endif
+
 #endif //DEFANDPAR_H 
