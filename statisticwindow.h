@@ -27,6 +27,7 @@ class StatisticWindow: public QDialog
   private slots:
     //! get count type article
     int getCoutArticle(int article);
+    void refresh();
 
   private:
     int allCount;

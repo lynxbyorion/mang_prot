@@ -9,41 +9,49 @@ StatisticWindow::StatisticWindow()
     allCount = 0;
 
     QLabel *prosthesis = new QLabel(tr("Протез: "));
-    countProsthesis = new QLabel(QString::number(getCoutArticle(0)));
+    countProsthesis = new QLabel();
 
     QLabel *karset = new QLabel(tr("Карсет: "));
-    countKarset = new QLabel(QString::number(getCoutArticle(1)));
+    countKarset = new QLabel();
 
     QLabel *splint = new QLabel(tr("Тутор: "));
-    countSplint = new QLabel(QString::number(getCoutArticle(2)));
+    countSplint = new QLabel();
 
     QLabel *bandage = new QLabel(tr("Бандаж: "));
-    countBandage = new QLabel(QString::number(getCoutArticle(3)));
+    countBandage = new QLabel();
 
     QLabel *knee = new QLabel(tr("Наколенники: "));
-    countKnee = new QLabel(QString::number(getCoutArticle(4)));
+    countKnee = new QLabel();
 
     QLabel *trussAntral = new QLabel(tr("Грыжевой бандаж (антральная грыжа): "));
-    countTrussAntral = new QLabel(QString::number(getCoutArticle(5)));
+    countTrussAntral = new QLabel();
 
     QLabel *truss = new QLabel(tr("Грыжевой бандаж (паховая грыжа): "));
-    countTruss = new QLabel(QString::number(getCoutArticle(6)));
+    countTruss = new QLabel();
 
     QLabel *orthopedicShoes = new QLabel(tr("Ортопедическая обувь: "));
-    countShoes = new QLabel(QString::number(getCoutArticle(7)));
+    countShoes = new QLabel();
 
     QLabel *breast = new QLabel(tr("Протез молочной железы: "));
-    countBreast = new QLabel(QString::number(getCoutArticle(8)));
+    countBreast = new QLabel();
 
     QLabel *headholder = new QLabel(tr("Головодержатель: "));
-    countHeadholder = new QLabel(QString::number(getCoutArticle(9)));
+    countHeadholder = new QLabel();
 
     QLabel *all = new QLabel(tr("Общее колличество заказов: "));
-    lbAllCount = new QLabel(QString::number(allCount));
+    lbAllCount = new QLabel();
 
     beginDate = new QDateEdit();
+    beginDate->setDisplayFormat("dd.MM.yyyy");
+    connect(beginDate, SIGNAL(dateChanged(const QDate &)),
+                this, SLOT(refresh()));
 
     endDate = new QDateEdit(QDate::currentDate());
+    endDate->setDisplayFormat("dd.MM.yyyy");
+    connect(endDate, SIGNAL(dateChanged(const QDate &)),
+                this, SLOT(refresh()));
+
+    refresh();
 
     pbPrint = new QPushButton(tr("Печать"));
     pbPrint->setEnabled(false); // FIXME
@@ -100,7 +108,7 @@ StatisticWindow::StatisticWindow()
     setLayout(mainLayout);
 
     setWindowTitle(tr("Статистика"));
-    //setFixedSize(600,400);
+    setFixedSize(600,400);
 }
 
 // slots
@@ -109,11 +117,31 @@ int StatisticWindow::getCoutArticle(int article)
     QString query;
     query = QString("SELECT COUNT(*) FROM clientorder WHERE article = %1 "
             "AND deliverydate > '%2' AND deliverydate < '%3'")
-        .arg(article).arg("1970-01-02").arg("2000-11-01");
+        .arg(article).arg(beginDate->date().toString("yyyy-MM-dd"))
+        .arg(endDate->date().toString("yyyy-MM-dd"));
 
-    int count = db->getCountArticle(query);
+    int count =  db->getCountArticle(query);
 
     allCount += count;
 
     return count;
 }
+
+void StatisticWindow::refresh()
+{
+    allCount = 0;
+
+    countProsthesis->setText(QString::number(getCoutArticle(0)));
+    countKarset->setText(QString::number(getCoutArticle(1)));
+    countSplint->setText(QString::number(getCoutArticle(2)));
+    countBandage->setText(QString::number(getCoutArticle(3)));
+    countKnee->setText(QString::number(getCoutArticle(4)));
+    countTrussAntral->setText(QString::number(getCoutArticle(5)));
+    countTruss->setText(QString::number(getCoutArticle(6)));
+    countShoes->setText(QString::number(getCoutArticle(7)));
+    countBreast->setText(QString::number(getCoutArticle(8)));
+    countHeadholder->setText(QString::number(getCoutArticle(9)));
+
+    lbAllCount->setText(QString::number(allCount));
+}
+
