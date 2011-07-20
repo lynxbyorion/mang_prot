@@ -29,6 +29,8 @@ class StatisticWindow: public QDialog
     int getCoutArticle(int article);
 
   private:
+    int allCount;
+
     QLabel *countProsthesis;
     QLabel *countKarset;
     QLabel *countSplint;
@@ -39,6 +41,7 @@ class StatisticWindow: public QDialog
     QLabel *countShoes;
     QLabel *countBreast;
     QLabel *countHeadholder;
+    QLabel *lbAllCount;
 
     QDateEdit *beginDate;
     QDateEdit *endDate;

@@ -6,6 +6,7 @@
 StatisticWindow::StatisticWindow()
 {
     db = DataBaseManager::getInstance();
+    allCount = 0;
 
     QLabel *prosthesis = new QLabel(tr("Протез: "));
     countProsthesis = new QLabel(QString::number(getCoutArticle(0)));
@@ -37,6 +38,9 @@ StatisticWindow::StatisticWindow()
     QLabel *headholder = new QLabel(tr("Головодержатель: "));
     countHeadholder = new QLabel(QString::number(getCoutArticle(9)));
 
+    QLabel *all = new QLabel(tr("Общее колличество заказов: "));
+    lbAllCount = new QLabel(QString::number(allCount));
+
     beginDate = new QDateEdit();
 
     endDate = new QDateEdit(QDate::currentDate());
@@ -58,6 +62,8 @@ StatisticWindow::StatisticWindow()
     articleLayout->addWidget(orthopedicShoes);
     articleLayout->addWidget(breast);
     articleLayout->addWidget(headholder);
+    articleLayout->addStrut(3);
+    articleLayout->addWidget(all);
 
     QVBoxLayout *countLayout = new QVBoxLayout;
     countLayout->addWidget(countProsthesis);
@@ -70,6 +76,7 @@ StatisticWindow::StatisticWindow()
     countLayout->addWidget(countShoes);
     countLayout->addWidget(countBreast);
     countLayout->addWidget(countHeadholder);
+    countLayout->addWidget(lbAllCount);
 
     QHBoxLayout *topLayout = new QHBoxLayout;
     topLayout->addLayout(articleLayout);
@@ -104,5 +111,9 @@ int StatisticWindow::getCoutArticle(int article)
             "AND deliverydate > '%2' AND deliverydate < '%3'")
         .arg(article).arg("1970-01-02").arg("2000-11-01");
 
-    return db->getCountArticle(query);
+    int count = db->getCountArticle(query);
+
+    allCount += count;
+
+    return count;
 }
