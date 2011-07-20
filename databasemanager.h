@@ -38,6 +38,7 @@ class DataBaseManager: public QObject
   public:
     int getMaxID();
     int getMaxOrderID();
+    int getCountArticle(QString query_);
     bool insertClientInDB(Client &);
     bool removeClient(const int);
     bool insertOrderInDB(Order &);

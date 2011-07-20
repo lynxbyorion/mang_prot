@@ -172,6 +172,19 @@ int DataBaseManager::getMaxOrderID()
     return id;
 }
 
+int DataBaseManager::getCountArticle(QString query_)
+{
+    QSqlQuery query(query_);
+
+    if(!query.exec()) {
+        qDebug() << query.lastError();
+        return -1;
+    }
+    query.next();
+
+    return query.value(0).toInt();
+}
+
 bool DataBaseManager::insertClientInDB(Client &client)
 {
     QSqlQuery query;
