@@ -11,6 +11,24 @@ Client::Client()
 {
 }
 
+void Client::setName(QString name_)
+{
+    name = name_.toLower();
+    name[0] = name[0].toUpper();
+}
+
+void Client::setSurname(QString surname_)
+{
+    surname = surname_.toLower();
+    surname[0] = surname[0].toUpper();
+}
+
+void Client::setPatronymic(QString patronymic_)
+{
+    patronymic = patronymic_.toLower();
+    patronymic[0] = patronymic[0].toUpper();
+}
+
 QString Client::getDisabilityToString()
 {
     switch(disability)

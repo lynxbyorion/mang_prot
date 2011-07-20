@@ -11,11 +11,13 @@ MainForm::MainForm()
 
     QLabel *lbLastName = new QLabel("Фамилия");
     leLastName = new QLineEdit();
+    leLastName->setInputMask("AAAAAAAAAAAAAAAAAA");
     QLabel *lbName = new QLabel("Имя");
     leName = new QLineEdit();
+    leName->setInputMask("AAAAAAAAAAAAAAAAAAAA");
     QLabel *lbPatronymic = new QLabel("Отчество");
     lePatronymic = new QLineEdit();
-
+    lePatronymic->setInputMask("AAAAAAAAAAAAAAAAAAAA");
 
     connect(leLastName, SIGNAL(textChanged(const QString &)), this,
             SLOT(activeSearch()));

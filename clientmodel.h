@@ -38,11 +38,11 @@ class Client
 
     void setID(int i) { id = i; }
     int getID() { return id; }
-    void setName(QString n) { name = n; }
+    void setName(QString);
     QString getName() { return name; }
-    void setSurname(QString s) { surname = s; }
+    void setSurname(QString s);
     QString getSurname() { return surname; }
-    void setPatronymic(QString p) { patronymic = p; }
+    void setPatronymic(QString p);
     QString getPatronymic() { return patronymic; }
     void setYear(int y) { yearOfBirth = y; }
     int getYear() { return yearOfBirth; }
