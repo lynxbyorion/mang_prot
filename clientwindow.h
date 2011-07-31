@@ -6,6 +6,7 @@
 #include "iviewclientform.h"
 
 class QLabel;
+class QLineEdit;
 class QListView;
 class QDateEdit;
 class QComboBox;
@@ -58,6 +59,12 @@ class ClientWindow: public QDialog, public IViewClientForm
     QLabel *lbNumberOrder;
     QDateEdit *deReceptionDate;
     QComboBox *cbPayment;
+
+    QLineEdit *leFssNumber;
+    QDateEdit *deFssDate;
+    QLineEdit *leFssNumberOfList;
+
+
     QDateEdit *deDeliveryDate;
     QComboBox *cbArticle;
     QTextEdit *teDiagnosis;

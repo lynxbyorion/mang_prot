@@ -73,6 +73,19 @@ ClientWindow::ClientWindow(QWidget *parent /* =0 */)
             << "компенсация");
     cbPayment->addItems(listPayment);
 
+    QLabel *lbFssNumber = new QLabel(tr("Номер:"));
+    leFssNumber = new QLineEdit();
+    lbFssNumber->setBuddy(leFssNumber);
+    QLabel *lbFssDate = new QLabel(tr("Дата направления:"));
+    deFssDate = new QDateEdit();
+    deFssDate->setDisplayFormat("dd.MM.yyyy");
+    lbFssDate->setBuddy(deFssDate);
+    QLabel *lbFssNumberOfList = new QLabel(tr("Номер по журналу:"));
+    leFssNumberOfList = new QLineEdit();
+
+
+    QGroupBox *groupFSS = new QGroupBox(tr("FSS"));
+
     QLabel *lbType = new QLabel("Вид изделия: ");
     cbArticle = new QComboBox;
     QStringList listArticle(QStringList() << "Протез"
@@ -106,9 +119,21 @@ ClientWindow::ClientWindow(QWidget *parent /* =0 */)
     numOrderLayout->addWidget(lbReceptionDate);
     numOrderLayout->addWidget(deReceptionDate);
 
+
+    QGridLayout *fssLayout = new QGridLayout;
+    fssLayout->addWidget(lbFssNumber, 0, 0);
+    fssLayout->addWidget(leFssNumber, 0, 1);
+    fssLayout->addWidget(lbFssDate, 1, 0);
+    fssLayout->addWidget(deFssDate, 1, 1);
+    fssLayout->addWidget(lbFssNumberOfList, 2, 0);
+    fssLayout->addWidget(leFssNumberOfList, 2, 1);
+
+    groupFSS->setLayout(fssLayout);
+
     QHBoxLayout *payOrderLayout = new QHBoxLayout;
     payOrderLayout->addWidget(lbPayment);
     payOrderLayout->addWidget(cbPayment);
+    payOrderLayout->addWidget(groupFSS);
 
     QHBoxLayout *articleOrderLayout = new QHBoxLayout;
     articleOrderLayout->addWidget(lbType);
@@ -142,7 +167,7 @@ ClientWindow::ClientWindow(QWidget *parent /* =0 */)
 
     setLayout(mainLayout);
 
-    setFixedSize(500, 700);
+    //setFixedSize(500, 700);
     setWindowTitle(tr("Окно клиента"));
 }
 
