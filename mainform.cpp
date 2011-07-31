@@ -265,7 +265,13 @@ void MainForm::activeClickOnItemList(const QModelIndex &index)
 
 void MainForm::removeClient()
 {
-    emit(actionRemoveClient(listClient->currentIndex().row()));
+    int index = listClient->currentIndex().row();
+    if(index < 0)
+    {
+        QMessageBox::information(this, tr("Удаление невозможно"),
+                tr("Клиент не выбран или отсутствует."));
+    } else
+        emit(actionRemoveClient(index));
 }
 
 void MainForm::createStatisticWindow()
