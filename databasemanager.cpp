@@ -135,6 +135,10 @@ bool DataBaseManager::dbOpen()
     else
         qDebug() << "Insert!";
 
+    queru.prepare("CREATE TABLE IF NOT EXISTS orderfss "
+            " (idorder INTEGER UNIQUE KEY, numberfss NUM, datefss DATE, "
+            " journalnum NUM)");
+
     return true;
 }
 
@@ -243,14 +247,17 @@ bool DataBaseManager::insertOrderInDB(Order &order)
     query.bindValue(4, order.getDeliveryDate());
     query.bindValue(5, order.getDiagnosis());
     query.bindValue(6, order.getArticle());
-    if (!query.exec())
+    if (!query.exec()) {
         qDebug() << "EE in insert order: " << query.lastError();
-    else
-    {
-        qDebug() << "Insert!";
-        return true;
+        return false;
     }
-    return false;
+
+    qDebug() << "Insert!";
+
+    //if(order.getPayment() == 0) {
+        //query.prepare("INSERT INTO orderfss (idorder, numberfss, datefss,
+            //journalnum) VALUES (?, ?, ?, ?
+    //}
 }
 
 bool DataBaseManager::removeOrderInDB(const int idx_)
