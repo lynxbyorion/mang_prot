@@ -205,6 +205,17 @@ void ClientWindow::currentOrder(Order &order)
     deDeliveryDate->setDate(order.getDeliveryDate());
     teDiagnosis->setText(order.getDiagnosis());
     cbArticle->setCurrentIndex(order.getArticle());
+
+    if (order.getPayment() == 0) {
+        leFssNumber->setText(QString::number(order.getNumberFss()));
+        deFssDate->setDate(order.getDateFss());
+        leFssNumberOfList->setText(QString::number(order.getJournalNum()));
+    } else
+    {
+        leFssNumber->setText("");
+        deFssDate->setDate(QDate());
+        leFssNumberOfList->setText("");
+    }
 }
 
 // slots
@@ -218,6 +229,9 @@ void ClientWindow::activePbAddOrder()
     Order order;
     order.setReceptionDate(deReceptionDate->date());
     order.setPayment((Order::Payment)cbPayment->currentIndex());
+    order.setNumberFss(leFssNumber->text().toInt());
+    order.setDateFss(deFssDate->date());
+    order.setJournalNum(leFssNumberOfList->text().toInt());
     order.setDeliveryDate(deDeliveryDate->date());
     order.setArticle((Order::Article)cbArticle->currentIndex());
     order.setDiagnosis(teDiagnosis->toPlainText());

@@ -1,6 +1,7 @@
 #include <QDebug>
 
 #include "clientmodel.h"
+#include <clientorder.h>
 
 #include "databasemanager.h"
 #include "defandpar.h"

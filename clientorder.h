@@ -47,6 +47,12 @@ class Order {
     int getIDClient() { return idClient; }
     void setPayment(Payment p) { payment = p; }
     Payment getPayment() { return payment; }
+    void setNumberFss(int number) { numberFss = number; }
+    int getNumberFss() { return numberFss; }
+    void setDateFss(QDate date) { dateFss = date; }
+    QDate getDateFss() { return dateFss; }
+    void setJournalNum(int num) { journalNum = num; }
+    int getJournalNum() { return journalNum; }
     void setReceptionDate(QDate date) { receptionDate = date; }
     QDate getReceptionDate() { return receptionDate; }
     void setDeliveryDate(QDate date) { deliveryDate = date; }
@@ -63,6 +69,9 @@ class Order {
     int id;
     int idClient;
     Payment payment;
+    int numberFss;
+    QDate dateFss;
+    int journalNum;
     QDate   receptionDate;
     QDate   deliveryDate;
     QString diagnosis;

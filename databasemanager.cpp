@@ -101,7 +101,8 @@ bool DataBaseManager::dbOpen()
 
     query.prepare("CREATE TABLE IF NOT EXISTS clientorder "
             " (idorder INTEGER UNIQUE PRIMARY KEY, idclient INTEGER, "
-            " payment NUM, receptiondate DATE, deliverydate DATE, diagnosis TEXT, "
+            " payment NUM, numberfss NUM, datefss DATE, journalfssnum NUM, "
+            " receptiondate DATE, deliverydate DATE, diagnosis TEXT, "
             " article NUM)" );
     if(!query.exec())
         qDebug() << query.lastError();
@@ -233,24 +234,26 @@ bool DataBaseManager::insertOrderInDB(Order &order)
 {
     QSqlQuery query;
 
-    query.prepare("INSERT INTO clientorder (idorder, idclient, payment, receptiondate, "
-            " deliverydate, diagnosis, article) "
-            " VALUES(?, ?, ?, ?, ?, ?, ?)");
+    query.prepare("INSERT INTO clientorder (idorder, idclient, payment, numberFss, "
+            " datefss, journalfssnum, receptiondate, deliverydate, diagnosis, article) "
+            " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     query.bindValue(0, getMaxOrderID() + 1);
     query.bindValue(1, order.getIDClient());
     query.bindValue(2, order.getPayment());
-    query.bindValue(3, order.getReceptionDate());
-    query.bindValue(4, order.getDeliveryDate());
-    query.bindValue(5, order.getDiagnosis());
-    query.bindValue(6, order.getArticle());
-    if (!query.exec())
+    query.bindValue(3, order.getNumberFss());
+    query.bindValue(4, order.getDateFss());
+    query.bindValue(5, order.getJournalNum());
+    query.bindValue(6, order.getReceptionDate());
+    query.bindValue(7, order.getDeliveryDate());
+    query.bindValue(8, order.getDiagnosis());
+    query.bindValue(9, order.getArticle());
+    if (!query.exec()) {
         qDebug() << "EE in insert order: " << query.lastError();
-    else
-    {
-        qDebug() << "Insert!";
-        return true;
+        return false;
     }
-    return false;
+    qDebug() << "Insert!";
+
+    return true;
 }
 
 bool DataBaseManager::removeOrderInDB(const int idx_)
@@ -352,10 +355,12 @@ bool DataBaseManager::getClientOrders(int idClient, QList<Order*> &ordersList)
         Order* order = new Order;
         order->setID(query.value(0).toInt());
         order->setPayment((Order::Payment)query.value(2).toInt());
-        order->setReceptionDate(query.value(3).toDate());
-        order->setDeliveryDate(query.value(4).toDate());
-        order->setDiagnosis(query.value(5).toString());
-        order->setArticle((Order::Article)query.value(6).toInt());
+        order->setNumberFss(query.value(3).toInt());
+        order->setDateFss(query.value(4).toDate());
+        order->setJournalNum(query.value(5).toInt());
+        order->setDeliveryDate(query.value(7).toDate());
+        order->setDiagnosis(query.value(8).toString());
+        order->setArticle((Order::Article)query.value(9).toInt());
         ordersList.append(order);
     }
     return true;
