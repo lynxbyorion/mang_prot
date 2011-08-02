@@ -197,14 +197,14 @@ void ClientWindow::setOrdersList(QStringList list)
     listOrders->setModel( new QStringListModel(list));
 }
 
-void ClientWindow::setOrderData(QStringList list)
+void ClientWindow::currentOrder(Order &order)
 {
-    lbNumberOrder->setText(list.takeFirst());
-    cbPayment->setCurrentIndex(list.takeFirst().toInt());
-    deReceptionDate->setDate(QDate::fromString(list.takeFirst()));
-    deDeliveryDate->setDate(QDate::fromString(list.takeFirst()));
-    teDiagnosis->setText(list.takeFirst());
-    cbArticle->setCurrentIndex(list.takeFirst().toInt());
+    lbNumberOrder->setText(QString(order.getID()));
+    cbPayment->setCurrentIndex(order.getPayment());
+    deReceptionDate->setDate(order.getReceptionDate());
+    deDeliveryDate->setDate(order.getDeliveryDate());
+    teDiagnosis->setText(order.getDiagnosis());
+    cbArticle->setCurrentIndex(order.getArticle());
 }
 
 // slots

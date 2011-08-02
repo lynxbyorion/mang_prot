@@ -8,6 +8,8 @@
 #ifndef IVIEWCLIENTFORM_H
 #define IVIEWCLIENTFORM_H
 
+#include <clientorder.h>
+
 class IViewClientForm
 {
   public:
@@ -15,7 +17,7 @@ class IViewClientForm
     virtual void setDisability(QString) = 0;
     virtual void setAddress(QString) = 0;
     virtual void setOrdersList(QStringList) = 0;
-    virtual void setOrderData(QStringList) = 0;
+    virtual void currentOrder(Order &) = 0;
 
   signals:
     virtual void viewCurrentOrder(const int) = 0;

@@ -54,7 +54,7 @@ void ClientPresenter::initialize()
     clientForm->setOrdersList(createOrdersStringList());
 
     if (clientOrders.size() != 0) {
-        clientForm->setOrderData(orderToStringList(0));
+        clientForm->currentOrder(*clientOrders.at(0));
     }
 }
 
@@ -103,21 +103,24 @@ QStringList ClientPresenter::orderToStringList(int indexList)
      return list;
 }
 
+// FIXME this method is not optimized
 void ClientPresenter::refresh()
 {
+    clientOrders.clear();
+    model->getClientOrders(client->getID(), clientOrders);
+
     if(clientOrders.size()) {
-        clientOrders.clear();
-        model->getClientOrders(client->getID(), clientOrders);
+        qDebug() << "in if " << clientOrders.size();
 
         clientForm->setOrdersList(createOrdersStringList());
-        clientForm->setOrderData(orderToStringList(0));
+        clientForm->currentOrder(*clientOrders.at(0));
     }
 }
 
 // slots
 void ClientPresenter::activeCurrentOrder(const int index)
 {
-    clientForm->setOrderData(orderToStringList(index));
+    clientForm->currentOrder(*(clientOrders.at(index)));
 }
 
 void ClientPresenter::addOrder(Order &order)
@@ -129,6 +132,6 @@ void ClientPresenter::addOrder(Order &order)
 
 void ClientPresenter::removeOrder(const int idx)
 {
-    model->removeOrder(clientOrders.at(idx)->getID());
+    model->removeOrder(clientOrders.takeAt(idx)->getID());
     refresh();
 }
