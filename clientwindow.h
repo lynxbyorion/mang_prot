@@ -42,6 +42,7 @@ class ClientWindow: public QDialog, public IViewClientForm
     void activeCurrentOrder(const QModelIndex &);
     void activePbAddOrder();
     void pushPbDelOrder();
+    void checkFss(int index);
 
   private:
     ClientPresenter *presenter;
@@ -55,6 +56,8 @@ class ClientWindow: public QDialog, public IViewClientForm
     QLabel *lbName;
     QLabel *lbDis;
     QLabel *lbAddress;
+
+    QGroupBox *groupFss;
 
     QLabel *lbNumberOrder;
     QDateEdit *deReceptionDate;

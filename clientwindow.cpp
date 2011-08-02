@@ -72,6 +72,8 @@ ClientWindow::ClientWindow(QWidget *parent /* =0 */)
     QStringList listPayment(QStringList() << "фсс" << "наличный расчёт"
             << "компенсация");
     cbPayment->addItems(listPayment);
+    connect(cbPayment, SIGNAL(currentIndexChanged(int)),
+                this, SLOT(checkFss(int)));
 
     QLabel *lbFssNumber = new QLabel(tr("Номер:"));
     leFssNumber = new QLineEdit();
@@ -83,8 +85,7 @@ ClientWindow::ClientWindow(QWidget *parent /* =0 */)
     QLabel *lbFssNumberOfList = new QLabel(tr("Номер по журналу:"));
     leFssNumberOfList = new QLineEdit();
 
-
-    QGroupBox *groupFSS = new QGroupBox(tr("FSS"));
+    groupFss = new QGroupBox(tr("ФСС"));
 
     QLabel *lbType = new QLabel("Вид изделия: ");
     cbArticle = new QComboBox;
@@ -128,12 +129,12 @@ ClientWindow::ClientWindow(QWidget *parent /* =0 */)
     fssLayout->addWidget(lbFssNumberOfList, 2, 0);
     fssLayout->addWidget(leFssNumberOfList, 2, 1);
 
-    groupFSS->setLayout(fssLayout);
+    groupFss->setLayout(fssLayout);
 
     QHBoxLayout *payOrderLayout = new QHBoxLayout;
     payOrderLayout->addWidget(lbPayment);
     payOrderLayout->addWidget(cbPayment);
-    payOrderLayout->addWidget(groupFSS);
+    payOrderLayout->addWidget(groupFss);
 
     QHBoxLayout *articleOrderLayout = new QHBoxLayout;
     articleOrderLayout->addWidget(lbType);
@@ -234,4 +235,9 @@ void ClientWindow::pushPbDelOrder()
     }
     else
         emit activeRemoveOrder(listOrders->currentIndex().row());
+}
+
+void ClientWindow::checkFss(int index)
+{
+    index == 0 ? groupFss->setDisabled(false) : groupFss->setDisabled(true);
 }
