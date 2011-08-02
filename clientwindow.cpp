@@ -199,7 +199,7 @@ void ClientWindow::setOrdersList(QStringList list)
 
 void ClientWindow::currentOrder(Order &order)
 {
-    lbNumberOrder->setText(QString(order.getID()));
+    lbNumberOrder->setText(QString::number(order.getID()));
     cbPayment->setCurrentIndex(order.getPayment());
     deReceptionDate->setDate(order.getReceptionDate());
     deDeliveryDate->setDate(order.getDeliveryDate());

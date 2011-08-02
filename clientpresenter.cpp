@@ -108,13 +108,10 @@ void ClientPresenter::refresh()
 {
     clientOrders.clear();
     model->getClientOrders(client->getID(), clientOrders);
+    clientForm->setOrdersList(createOrdersStringList());
 
-    if(clientOrders.size()) {
-        qDebug() << "in if " << clientOrders.size();
-
-        clientForm->setOrdersList(createOrdersStringList());
+    if(clientOrders.size())
         clientForm->currentOrder(*clientOrders.at(0));
-    }
 }
 
 // slots
