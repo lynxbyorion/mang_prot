@@ -237,7 +237,7 @@ bool DataBaseManager::insertOrderInDB(Order &order)
     query.prepare("INSERT INTO clientorder (idorder, idclient, payment, numberFss, "
             " datefss, journalfssnum, receptiondate, deliverydate, diagnosis, article) "
             " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    query.bindValue(0, getMaxOrderID() + 1);
+    query.bindValue(0, order.getID());
     query.bindValue(1, order.getIDClient());
     query.bindValue(2, order.getPayment());
     query.bindValue(3, order.getNumberFss());

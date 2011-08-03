@@ -59,7 +59,7 @@ class ClientWindow: public QDialog, public IViewClientForm
 
     QGroupBox *groupFss;
 
-    QLabel *lbNumberOrder;
+    QLineEdit *leNumberOrder;
     QDateEdit *deReceptionDate;
     QComboBox *cbPayment;
 
