@@ -62,7 +62,7 @@ ClientWindow::ClientWindow(QWidget *parent /* =0 */)
 
     // ordering information
     QLabel *lbNumberText = new QLabel("№ ");
-    lbNumberOrder = new QLabel("0");
+    leNumberOrder = new QLineEdit("");
     QLabel *lbReceptionDate = new QLabel("Дата обращения: ");
     deReceptionDate = new QDateEdit;
     deReceptionDate->setDisplayFormat("dd.MM.yyyy");
@@ -115,7 +115,7 @@ ClientWindow::ClientWindow(QWidget *parent /* =0 */)
 
     QHBoxLayout *numOrderLayout = new QHBoxLayout;
     numOrderLayout->addWidget(lbNumberText);
-    numOrderLayout->addWidget(lbNumberOrder);
+    numOrderLayout->addWidget(leNumberOrder);
     numOrderLayout->addStretch();
     numOrderLayout->addWidget(lbReceptionDate);
     numOrderLayout->addWidget(deReceptionDate);
@@ -199,7 +199,7 @@ void ClientWindow::setOrdersList(QStringList list)
 
 void ClientWindow::currentOrder(Order &order)
 {
-    lbNumberOrder->setText(QString::number(order.getID()));
+    leNumberOrder->setText(QString::number(order.getID()));
     cbPayment->setCurrentIndex(order.getPayment());
     deReceptionDate->setDate(order.getReceptionDate());
     deDeliveryDate->setDate(order.getDeliveryDate());
@@ -227,6 +227,7 @@ void ClientWindow::activeCurrentOrder(const QModelIndex &index)
 void ClientWindow::activePbAddOrder()
 {
     Order order;
+    order.setID(leNumberOrder->text().toInt());
     order.setReceptionDate(deReceptionDate->date());
     order.setPayment((Order::Payment)cbPayment->currentIndex());
     order.setNumberFss(leFssNumber->text().toInt());
