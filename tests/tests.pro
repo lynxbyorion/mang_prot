@@ -3,10 +3,13 @@ TEMPLATE = app
 
 CONFIG += qtestlib
 
-QT += testlib
-QT -= gui
+QT += testlib gui sql
 
 INCLUDEPATH += . ../src
 
-SOURCES += test_clientwindow.cpp
+HEADERS += test_clientwindow.h
+
+SOURCES += test_clientwindow.cpp \
+        clientwindow.cpp
+
 

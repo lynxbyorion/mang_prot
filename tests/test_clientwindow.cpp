@@ -1,17 +1,26 @@
+#include "test_clientwindow.h"
+
 #include <QtTest/QtTest>
 
-class ClientWindowTest: public QObject
-{
-    Q_OBJECT
+#include <clientwindow.h>
 
-  private slots:
-    void toUpper();
-};
+void ClientWindowTest::init()
+{
+    clientWindow = new ClientWindow();
+}
 
 void ClientWindowTest::toUpper()
 {
     QString str("Hello test");
-    QCOMPARE(str.toUpper(), QString("HELLO TEST"));
+    QCOMPARE(str.toUpper(), QString("HELLo TEST"));
+}
+
+void ClientWindowTest::testSetFullName()
+{
+    //ClientWindow* clientWindow = new ClientWindow();
+    QString name("Иван Иванович Иванов");
+
+    QCOMPARE("A", "A");
 }
 
 QTEST_MAIN(ClientWindowTest)
